@@ -1,0 +1,2521 @@
+                                      1 ;--------------------------------------------------------
+                                      2 ; File Created by SDCC : free open source ANSI-C Compiler
+                                      3 ; Version 4.2.0 #13081 (MINGW64)
+                                      4 ;--------------------------------------------------------
+                                      5 	.module buzzer
+                                      6 	.optsdcc -mmcs51 --model-small
+                                      7 	
+                                      8 ;--------------------------------------------------------
+                                      9 ; Public variables in this module
+                                     10 ;--------------------------------------------------------
+                                     11 	.globl _ryssdnr
+                                     12 	.globl _qfl
+                                     13 	.globl _two_tigers
+                                     14 	.globl _Musical_Scale
+                                     15 	.globl _time_disable
+                                     16 	.globl _time_enable
+                                     17 	.globl _pwm_disable
+                                     18 	.globl _pwm_enable
+                                     19 	.globl _PWM1_Interrupt
+                                     20 	.globl _P
+                                     21 	.globl _F1
+                                     22 	.globl _OV
+                                     23 	.globl _RS0
+                                     24 	.globl _RS1
+                                     25 	.globl _F0
+                                     26 	.globl _AC
+                                     27 	.globl _CY
+                                     28 	.globl _P54
+                                     29 	.globl _P53
+                                     30 	.globl _P52
+                                     31 	.globl _P51
+                                     32 	.globl _P50
+                                     33 	.globl _P47
+                                     34 	.globl _P46
+                                     35 	.globl _P45
+                                     36 	.globl _P44
+                                     37 	.globl _P43
+                                     38 	.globl _P42
+                                     39 	.globl _P41
+                                     40 	.globl _P40
+                                     41 	.globl _PX0
+                                     42 	.globl _PT0
+                                     43 	.globl _PX1
+                                     44 	.globl _PT1
+                                     45 	.globl _PS
+                                     46 	.globl _PADC
+                                     47 	.globl _PLVD
+                                     48 	.globl _PPCA
+                                     49 	.globl _P37
+                                     50 	.globl _P36
+                                     51 	.globl _P35
+                                     52 	.globl _P34
+                                     53 	.globl _P33
+                                     54 	.globl _P32
+                                     55 	.globl _P31
+                                     56 	.globl _P30
+                                     57 	.globl _EX0
+                                     58 	.globl _ET0
+                                     59 	.globl _EX1
+                                     60 	.globl _ET1
+                                     61 	.globl _ES
+                                     62 	.globl _EADC
+                                     63 	.globl _ELVD
+                                     64 	.globl _EA
+                                     65 	.globl _P27
+                                     66 	.globl _P26
+                                     67 	.globl _P25
+                                     68 	.globl _P24
+                                     69 	.globl _P23
+                                     70 	.globl _P22
+                                     71 	.globl _P21
+                                     72 	.globl _P20
+                                     73 	.globl _RI
+                                     74 	.globl _TI
+                                     75 	.globl _RB8
+                                     76 	.globl _TB8
+                                     77 	.globl _REN
+                                     78 	.globl _SM2
+                                     79 	.globl _SM1
+                                     80 	.globl _SM0
+                                     81 	.globl _P17
+                                     82 	.globl _P16
+                                     83 	.globl _P15
+                                     84 	.globl _P14
+                                     85 	.globl _P13
+                                     86 	.globl _P12
+                                     87 	.globl _P11
+                                     88 	.globl _P10
+                                     89 	.globl _IT0
+                                     90 	.globl _IE0
+                                     91 	.globl _IT1
+                                     92 	.globl _IE1
+                                     93 	.globl _TR0
+                                     94 	.globl _TF0
+                                     95 	.globl _TR1
+                                     96 	.globl _TF1
+                                     97 	.globl _P07
+                                     98 	.globl _P06
+                                     99 	.globl _P05
+                                    100 	.globl _P04
+                                    101 	.globl _P03
+                                    102 	.globl _P02
+                                    103 	.globl _P01
+                                    104 	.globl _P00
+                                    105 	.globl _RSTCFG
+                                    106 	.globl _USBADR
+                                    107 	.globl _P7
+                                    108 	.globl _IAP_TPS
+                                    109 	.globl _USBCON
+                                    110 	.globl _B
+                                    111 	.globl _AUXINTIF
+                                    112 	.globl _IP3H
+                                    113 	.globl _USBDAT
+                                    114 	.globl _P6
+                                    115 	.globl _CMPCR2
+                                    116 	.globl _CMPCR1
+                                    117 	.globl _DPH1
+                                    118 	.globl _DPL1
+                                    119 	.globl _DPS
+                                    120 	.globl _P7M0
+                                    121 	.globl _P7M1
+                                    122 	.globl _ACC
+                                    123 	.globl _IP3
+                                    124 	.globl _ADCCFG
+                                    125 	.globl _USBCLK
+                                    126 	.globl _T2L
+                                    127 	.globl _T2H
+                                    128 	.globl _T3L
+                                    129 	.globl _T3H
+                                    130 	.globl _T4L
+                                    131 	.globl _T4H
+                                    132 	.globl _T4T3M
+                                    133 	.globl _PSW
+                                    134 	.globl _SPDAT
+                                    135 	.globl _SPCTL
+                                    136 	.globl _SPSTAT
+                                    137 	.globl _P6M0
+                                    138 	.globl _P6M1
+                                    139 	.globl _P5M0
+                                    140 	.globl _P5M1
+                                    141 	.globl _P5
+                                    142 	.globl _IAP_CONTR
+                                    143 	.globl _IAP_TRIG
+                                    144 	.globl _IAP_CMD
+                                    145 	.globl _IAP_ADDRL
+                                    146 	.globl _IAP_ADDRH
+                                    147 	.globl _IAP_DATA
+                                    148 	.globl _WDT_CONTR
+                                    149 	.globl _P4
+                                    150 	.globl _ADC_RESL
+                                    151 	.globl _ADC_RES
+                                    152 	.globl _ADC_CONTR
+                                    153 	.globl _P_SW2
+                                    154 	.globl _SADEN
+                                    155 	.globl _IP
+                                    156 	.globl _IPH
+                                    157 	.globl _IP2H
+                                    158 	.globl _IP2
+                                    159 	.globl _P4M0
+                                    160 	.globl _P4M1
+                                    161 	.globl _P3M0
+                                    162 	.globl _P3M1
+                                    163 	.globl _P3
+                                    164 	.globl _IE2
+                                    165 	.globl _TA
+                                    166 	.globl _S3BUF
+                                    167 	.globl _S3CON
+                                    168 	.globl _WKTCH
+                                    169 	.globl _WKTCL
+                                    170 	.globl _SADDR
+                                    171 	.globl _IE
+                                    172 	.globl _P_SW1
+                                    173 	.globl _P2
+                                    174 	.globl _IRTRIM
+                                    175 	.globl _LIRTRIM
+                                    176 	.globl _IRCBAND
+                                    177 	.globl _S2BUF
+                                    178 	.globl _S2CON
+                                    179 	.globl _SBUF
+                                    180 	.globl _SCON
+                                    181 	.globl _P2M0
+                                    182 	.globl _P2M1
+                                    183 	.globl _P0M0
+                                    184 	.globl _P0M1
+                                    185 	.globl _P1M0
+                                    186 	.globl _P1M1
+                                    187 	.globl _P1
+                                    188 	.globl _INTCLKO
+                                    189 	.globl _AUXR
+                                    190 	.globl _TH1
+                                    191 	.globl _TH0
+                                    192 	.globl _TL1
+                                    193 	.globl _TL0
+                                    194 	.globl _TMOD
+                                    195 	.globl _TCON
+                                    196 	.globl _PCON
+                                    197 	.globl _S4BUF
+                                    198 	.globl _S4CON
+                                    199 	.globl _DPH
+                                    200 	.globl _DPL
+                                    201 	.globl _SP
+                                    202 	.globl _P0
+                                    203 	.globl _out_z
+                                    204 	.globl _shutdown_time
+                                    205 	.globl _Musi_List
+                                    206 	.globl _buzzer_play
+                                    207 	.globl _buzzer_is_play
+                                    208 	.globl _buzzer_app
+                                    209 ;--------------------------------------------------------
+                                    210 ; special function registers
+                                    211 ;--------------------------------------------------------
+                                    212 	.area RSEG    (ABS,DATA)
+      000000                        213 	.org 0x0000
+                           000080   214 _P0	=	0x0080
+                           000081   215 _SP	=	0x0081
+                           000082   216 _DPL	=	0x0082
+                           000083   217 _DPH	=	0x0083
+                           000084   218 _S4CON	=	0x0084
+                           000085   219 _S4BUF	=	0x0085
+                           000087   220 _PCON	=	0x0087
+                           000088   221 _TCON	=	0x0088
+                           000089   222 _TMOD	=	0x0089
+                           00008A   223 _TL0	=	0x008a
+                           00008B   224 _TL1	=	0x008b
+                           00008C   225 _TH0	=	0x008c
+                           00008D   226 _TH1	=	0x008d
+                           00008E   227 _AUXR	=	0x008e
+                           00008F   228 _INTCLKO	=	0x008f
+                           000090   229 _P1	=	0x0090
+                           000091   230 _P1M1	=	0x0091
+                           000092   231 _P1M0	=	0x0092
+                           000093   232 _P0M1	=	0x0093
+                           000094   233 _P0M0	=	0x0094
+                           000095   234 _P2M1	=	0x0095
+                           000096   235 _P2M0	=	0x0096
+                           000098   236 _SCON	=	0x0098
+                           000099   237 _SBUF	=	0x0099
+                           00009A   238 _S2CON	=	0x009a
+                           00009B   239 _S2BUF	=	0x009b
+                           00009D   240 _IRCBAND	=	0x009d
+                           00009E   241 _LIRTRIM	=	0x009e
+                           00009F   242 _IRTRIM	=	0x009f
+                           0000A0   243 _P2	=	0x00a0
+                           0000A2   244 _P_SW1	=	0x00a2
+                           0000A8   245 _IE	=	0x00a8
+                           0000A9   246 _SADDR	=	0x00a9
+                           0000AA   247 _WKTCL	=	0x00aa
+                           0000AB   248 _WKTCH	=	0x00ab
+                           0000AC   249 _S3CON	=	0x00ac
+                           0000AD   250 _S3BUF	=	0x00ad
+                           0000AE   251 _TA	=	0x00ae
+                           0000AF   252 _IE2	=	0x00af
+                           0000B0   253 _P3	=	0x00b0
+                           0000B1   254 _P3M1	=	0x00b1
+                           0000B2   255 _P3M0	=	0x00b2
+                           0000B3   256 _P4M1	=	0x00b3
+                           0000B4   257 _P4M0	=	0x00b4
+                           0000B5   258 _IP2	=	0x00b5
+                           0000B6   259 _IP2H	=	0x00b6
+                           0000B7   260 _IPH	=	0x00b7
+                           0000B8   261 _IP	=	0x00b8
+                           0000B9   262 _SADEN	=	0x00b9
+                           0000BA   263 _P_SW2	=	0x00ba
+                           0000BC   264 _ADC_CONTR	=	0x00bc
+                           0000BD   265 _ADC_RES	=	0x00bd
+                           0000BE   266 _ADC_RESL	=	0x00be
+                           0000C0   267 _P4	=	0x00c0
+                           0000C1   268 _WDT_CONTR	=	0x00c1
+                           0000C2   269 _IAP_DATA	=	0x00c2
+                           0000C3   270 _IAP_ADDRH	=	0x00c3
+                           0000C4   271 _IAP_ADDRL	=	0x00c4
+                           0000C5   272 _IAP_CMD	=	0x00c5
+                           0000C6   273 _IAP_TRIG	=	0x00c6
+                           0000C7   274 _IAP_CONTR	=	0x00c7
+                           0000C8   275 _P5	=	0x00c8
+                           0000C9   276 _P5M1	=	0x00c9
+                           0000CA   277 _P5M0	=	0x00ca
+                           0000CB   278 _P6M1	=	0x00cb
+                           0000CC   279 _P6M0	=	0x00cc
+                           0000CD   280 _SPSTAT	=	0x00cd
+                           0000CE   281 _SPCTL	=	0x00ce
+                           0000CF   282 _SPDAT	=	0x00cf
+                           0000D0   283 _PSW	=	0x00d0
+                           0000D1   284 _T4T3M	=	0x00d1
+                           0000D2   285 _T4H	=	0x00d2
+                           0000D3   286 _T4L	=	0x00d3
+                           0000D4   287 _T3H	=	0x00d4
+                           0000D5   288 _T3L	=	0x00d5
+                           0000D6   289 _T2H	=	0x00d6
+                           0000D7   290 _T2L	=	0x00d7
+                           0000DC   291 _USBCLK	=	0x00dc
+                           0000DE   292 _ADCCFG	=	0x00de
+                           0000DF   293 _IP3	=	0x00df
+                           0000E0   294 _ACC	=	0x00e0
+                           0000E1   295 _P7M1	=	0x00e1
+                           0000E2   296 _P7M0	=	0x00e2
+                           0000E3   297 _DPS	=	0x00e3
+                           0000E4   298 _DPL1	=	0x00e4
+                           0000E5   299 _DPH1	=	0x00e5
+                           0000E6   300 _CMPCR1	=	0x00e6
+                           0000E7   301 _CMPCR2	=	0x00e7
+                           0000E8   302 _P6	=	0x00e8
+                           0000EC   303 _USBDAT	=	0x00ec
+                           0000EE   304 _IP3H	=	0x00ee
+                           0000EF   305 _AUXINTIF	=	0x00ef
+                           0000F0   306 _B	=	0x00f0
+                           0000F4   307 _USBCON	=	0x00f4
+                           0000F5   308 _IAP_TPS	=	0x00f5
+                           0000F8   309 _P7	=	0x00f8
+                           0000FC   310 _USBADR	=	0x00fc
+                           0000FF   311 _RSTCFG	=	0x00ff
+                                    312 ;--------------------------------------------------------
+                                    313 ; special function bits
+                                    314 ;--------------------------------------------------------
+                                    315 	.area RSEG    (ABS,DATA)
+      000000                        316 	.org 0x0000
+                           000080   317 _P00	=	0x0080
+                           000081   318 _P01	=	0x0081
+                           000082   319 _P02	=	0x0082
+                           000083   320 _P03	=	0x0083
+                           000084   321 _P04	=	0x0084
+                           000085   322 _P05	=	0x0085
+                           000086   323 _P06	=	0x0086
+                           000087   324 _P07	=	0x0087
+                           00008F   325 _TF1	=	0x008f
+                           00008E   326 _TR1	=	0x008e
+                           00008D   327 _TF0	=	0x008d
+                           00008C   328 _TR0	=	0x008c
+                           00008B   329 _IE1	=	0x008b
+                           00008A   330 _IT1	=	0x008a
+                           000089   331 _IE0	=	0x0089
+                           000088   332 _IT0	=	0x0088
+                           000090   333 _P10	=	0x0090
+                           000091   334 _P11	=	0x0091
+                           000092   335 _P12	=	0x0092
+                           000093   336 _P13	=	0x0093
+                           000094   337 _P14	=	0x0094
+                           000095   338 _P15	=	0x0095
+                           000096   339 _P16	=	0x0096
+                           000097   340 _P17	=	0x0097
+                           00009F   341 _SM0	=	0x009f
+                           00009E   342 _SM1	=	0x009e
+                           00009D   343 _SM2	=	0x009d
+                           00009C   344 _REN	=	0x009c
+                           00009B   345 _TB8	=	0x009b
+                           00009A   346 _RB8	=	0x009a
+                           000099   347 _TI	=	0x0099
+                           000098   348 _RI	=	0x0098
+                           0000A0   349 _P20	=	0x00a0
+                           0000A1   350 _P21	=	0x00a1
+                           0000A2   351 _P22	=	0x00a2
+                           0000A3   352 _P23	=	0x00a3
+                           0000A4   353 _P24	=	0x00a4
+                           0000A5   354 _P25	=	0x00a5
+                           0000A6   355 _P26	=	0x00a6
+                           0000A7   356 _P27	=	0x00a7
+                           0000AF   357 _EA	=	0x00af
+                           0000AE   358 _ELVD	=	0x00ae
+                           0000AD   359 _EADC	=	0x00ad
+                           0000AC   360 _ES	=	0x00ac
+                           0000AB   361 _ET1	=	0x00ab
+                           0000AA   362 _EX1	=	0x00aa
+                           0000A9   363 _ET0	=	0x00a9
+                           0000A8   364 _EX0	=	0x00a8
+                           0000B0   365 _P30	=	0x00b0
+                           0000B1   366 _P31	=	0x00b1
+                           0000B2   367 _P32	=	0x00b2
+                           0000B3   368 _P33	=	0x00b3
+                           0000B4   369 _P34	=	0x00b4
+                           0000B5   370 _P35	=	0x00b5
+                           0000B6   371 _P36	=	0x00b6
+                           0000B7   372 _P37	=	0x00b7
+                           0000BF   373 _PPCA	=	0x00bf
+                           0000BE   374 _PLVD	=	0x00be
+                           0000BD   375 _PADC	=	0x00bd
+                           0000BC   376 _PS	=	0x00bc
+                           0000BB   377 _PT1	=	0x00bb
+                           0000BA   378 _PX1	=	0x00ba
+                           0000B9   379 _PT0	=	0x00b9
+                           0000B8   380 _PX0	=	0x00b8
+                           0000C0   381 _P40	=	0x00c0
+                           0000C1   382 _P41	=	0x00c1
+                           0000C2   383 _P42	=	0x00c2
+                           0000C3   384 _P43	=	0x00c3
+                           0000C4   385 _P44	=	0x00c4
+                           0000C5   386 _P45	=	0x00c5
+                           0000C6   387 _P46	=	0x00c6
+                           0000C7   388 _P47	=	0x00c7
+                           0000C8   389 _P50	=	0x00c8
+                           0000C9   390 _P51	=	0x00c9
+                           0000CA   391 _P52	=	0x00ca
+                           0000CB   392 _P53	=	0x00cb
+                           0000CC   393 _P54	=	0x00cc
+                           0000D7   394 _CY	=	0x00d7
+                           0000D6   395 _AC	=	0x00d6
+                           0000D5   396 _F0	=	0x00d5
+                           0000D4   397 _RS1	=	0x00d4
+                           0000D3   398 _RS0	=	0x00d3
+                           0000D2   399 _OV	=	0x00d2
+                           0000D1   400 _F1	=	0x00d1
+                           0000D0   401 _P	=	0x00d0
+                                    402 ;--------------------------------------------------------
+                                    403 ; overlayable register banks
+                                    404 ;--------------------------------------------------------
+                                    405 	.area REG_BANK_0	(REL,OVR,DATA)
+      000000                        406 	.ds 8
+                                    407 ;--------------------------------------------------------
+                                    408 ; internal ram data
+                                    409 ;--------------------------------------------------------
+                                    410 	.area DSEG    (DATA)
+      000000                        411 _Musi_List::
+      000000                        412 	.ds 6
+      000006                        413 _play_index:
+      000006                        414 	.ds 1
+      000007                        415 _play_count:
+      000007                        416 	.ds 2
+      000009                        417 _sleep_time:
+      000009                        418 	.ds 1
+      00000A                        419 _shutdown_time::
+      00000A                        420 	.ds 1
+      00000B                        421 _pwm_range:
+      00000B                        422 	.ds 1
+      00000C                        423 _buzzer_app__lc_65536_19:
+      00000C                        424 	.ds 1
+                                    425 ;--------------------------------------------------------
+                                    426 ; overlayable items in internal ram
+                                    427 ;--------------------------------------------------------
+                                    428 	.area	OSEG    (OVR,DATA)
+                                    429 ;--------------------------------------------------------
+                                    430 ; indirectly addressable internal ram data
+                                    431 ;--------------------------------------------------------
+                                    432 	.area ISEG    (DATA)
+                                    433 ;--------------------------------------------------------
+                                    434 ; absolute internal ram data
+                                    435 ;--------------------------------------------------------
+                                    436 	.area IABS    (ABS,DATA)
+                                    437 	.area IABS    (ABS,DATA)
+                                    438 ;--------------------------------------------------------
+                                    439 ; bit data
+                                    440 ;--------------------------------------------------------
+                                    441 	.area BSEG    (BIT)
+      000000                        442 _out_z::
+      000000                        443 	.ds 1
+      000001                        444 _buzzer_is_play_sloc0_1_0:
+      000001                        445 	.ds 1
+                                    446 ;--------------------------------------------------------
+                                    447 ; paged external ram data
+                                    448 ;--------------------------------------------------------
+                                    449 	.area PSEG    (PAG,XDATA)
+                                    450 ;--------------------------------------------------------
+                                    451 ; external ram data
+                                    452 ;--------------------------------------------------------
+                                    453 	.area XSEG    (XDATA)
+                                    454 ;--------------------------------------------------------
+                                    455 ; absolute external ram data
+                                    456 ;--------------------------------------------------------
+                                    457 	.area XABS    (ABS,XDATA)
+                                    458 ;--------------------------------------------------------
+                                    459 ; external initialized ram data
+                                    460 ;--------------------------------------------------------
+                                    461 	.area XISEG   (XDATA)
+                                    462 	.area HOME    (CODE)
+                                    463 	.area GSINIT0 (CODE)
+                                    464 	.area GSINIT1 (CODE)
+                                    465 	.area GSINIT2 (CODE)
+                                    466 	.area GSINIT3 (CODE)
+                                    467 	.area GSINIT4 (CODE)
+                                    468 	.area GSINIT5 (CODE)
+                                    469 	.area GSINIT  (CODE)
+                                    470 	.area GSFINAL (CODE)
+                                    471 	.area CSEG    (CODE)
+                                    472 ;--------------------------------------------------------
+                                    473 ; global & static initialisations
+                                    474 ;--------------------------------------------------------
+                                    475 	.area HOME    (CODE)
+                                    476 	.area GSINIT  (CODE)
+                                    477 	.area GSFINAL (CODE)
+                                    478 	.area GSINIT  (CODE)
+                                    479 ;------------------------------------------------------------
+                                    480 ;Allocation info for local variables in function 'buzzer_app'
+                                    481 ;------------------------------------------------------------
+                                    482 ;_lc                       Allocated with name '_buzzer_app__lc_65536_19'
+                                    483 ;------------------------------------------------------------
+                                    484 ;	src/buzzer.c:240: _SS
+      000000 75*0C 00         [24]  485 	mov	_buzzer_app__lc_65536_19,#0x00
+                                    486 ;	src/buzzer.c:160: uint8_t code *Musi_List[] = 
+      000003 75*00r4A         [24]  487 	mov	(_Musi_List + 0),#_two_tigers
+      000006 75*01s00         [24]  488 	mov	(_Musi_List + 1),#(_two_tigers >> 8)
+      000009 75*02r8D         [24]  489 	mov	((_Musi_List + 0x0002) + 0),#_qfl
+      00000C 75*03s00         [24]  490 	mov	((_Musi_List + 0x0002) + 1),#(_qfl >> 8)
+      00000F 75*04r50         [24]  491 	mov	((_Musi_List + 0x0004) + 0),#_ryssdnr
+      000012 75*05s02         [24]  492 	mov	((_Musi_List + 0x0004) + 1),#(_ryssdnr >> 8)
+                                    493 ;	src/buzzer.c:165: static uint8_t play_index = 0xff;
+      000015 75*06 FF         [24]  494 	mov	_play_index,#0xff
+                                    495 ;	src/buzzer.c:166: static uint16_t play_count = 0;
+      000018 E4               [12]  496 	clr	a
+      000019 F5*07            [12]  497 	mov	_play_count,a
+      00001B F5*08            [12]  498 	mov	(_play_count + 1),a
+                                    499 ;	src/buzzer.c:167: static uint8_t sleep_time = 0;
+                                    500 ;	1-genFromRTrack replaced	mov	_sleep_time,#0x00
+      00001D F5*09            [12]  501 	mov	_sleep_time,a
+                                    502 ;	src/buzzer.c:168: uint8_t shutdown_time = 0;
+                                    503 ;	1-genFromRTrack replaced	mov	_shutdown_time,#0x00
+      00001F F5*0A            [12]  504 	mov	_shutdown_time,a
+                                    505 ;	src/buzzer.c:169: static volatile uint8_t pwm_range = 0;
+                                    506 ;	1-genFromRTrack replaced	mov	_pwm_range,#0x00
+      000021 F5*0B            [12]  507 	mov	_pwm_range,a
+                                    508 ;	src/buzzer.c:170: bit out_z = 0;
+                                    509 ;	assignBit
+      000023 C2*00            [12]  510 	clr	_out_z
+                                    511 ;--------------------------------------------------------
+                                    512 ; Home
+                                    513 ;--------------------------------------------------------
+                                    514 	.area HOME    (CODE)
+                                    515 	.area HOME    (CODE)
+                                    516 ;--------------------------------------------------------
+                                    517 ; code
+                                    518 ;--------------------------------------------------------
+                                    519 	.area CSEG    (CODE)
+                                    520 ;------------------------------------------------------------
+                                    521 ;Allocation info for local variables in function 'buzzer_play'
+                                    522 ;------------------------------------------------------------
+                                    523 ;v                         Allocated to registers 
+                                    524 ;------------------------------------------------------------
+                                    525 ;	src/buzzer.c:172: void buzzer_play(uint8_t v)
+                                    526 ;	-----------------------------------------
+                                    527 ;	 function buzzer_play
+                                    528 ;	-----------------------------------------
+      000000                        529 _buzzer_play:
+                           000007   530 	ar7 = 0x07
+                           000006   531 	ar6 = 0x06
+                           000005   532 	ar5 = 0x05
+                           000004   533 	ar4 = 0x04
+                           000003   534 	ar3 = 0x03
+                           000002   535 	ar2 = 0x02
+                           000001   536 	ar1 = 0x01
+                           000000   537 	ar0 = 0x00
+      000000 85 82*06         [24]  538 	mov	_play_index,dpl
+                                    539 ;	src/buzzer.c:175: play_count = 0;
+      000003 E4               [12]  540 	clr	a
+      000004 F5*07            [12]  541 	mov	_play_count,a
+      000006 F5*08            [12]  542 	mov	(_play_count + 1),a
+                                    543 ;	src/buzzer.c:176: }
+      000008 22               [24]  544 	ret
+                                    545 ;------------------------------------------------------------
+                                    546 ;Allocation info for local variables in function 'buzzer_is_play'
+                                    547 ;------------------------------------------------------------
+                                    548 ;	src/buzzer.c:178: uint8_t buzzer_is_play(void)
+                                    549 ;	-----------------------------------------
+                                    550 ;	 function buzzer_is_play
+                                    551 ;	-----------------------------------------
+      000009                        552 _buzzer_is_play:
+                                    553 ;	src/buzzer.c:180: return play_index != 0xff;
+      000009 74 FF            [12]  554 	mov	a,#0xff
+      00000B B5*06 03         [24]  555 	cjne	a,_play_index,00103$
+      00000E D3               [12]  556 	setb	c
+      00000F 80 01            [24]  557 	sjmp	00104$
+      000011                        558 00103$:
+      000011 C3               [12]  559 	clr	c
+      000012                        560 00104$:
+      000012 B3               [12]  561 	cpl	c
+      000013 92*01            [24]  562 	mov	_buzzer_is_play_sloc0_1_0,c
+      000015 E4               [12]  563 	clr	a
+      000016 33               [12]  564 	rlc	a
+      000017 F5 82            [12]  565 	mov	dpl,a
+                                    566 ;	src/buzzer.c:181: }
+      000019 22               [24]  567 	ret
+                                    568 ;------------------------------------------------------------
+                                    569 ;Allocation info for local variables in function 'PWM1_Interrupt'
+                                    570 ;------------------------------------------------------------
+                                    571 ;	src/buzzer.c:184: void PWM1_Interrupt(void) interrupt(26)
+                                    572 ;	-----------------------------------------
+                                    573 ;	 function PWM1_Interrupt
+                                    574 ;	-----------------------------------------
+      00001A                        575 _PWM1_Interrupt:
+      00001A C0 E0            [24]  576 	push	acc
+      00001C C0 82            [24]  577 	push	dpl
+      00001E C0 83            [24]  578 	push	dph
+                                    579 ;	src/buzzer.c:189: PWM1_SR1 = 0x00;
+      000020 90 FE C5         [24]  580 	mov	dptr,#0xfec5
+      000023 E4               [12]  581 	clr	a
+      000024 F0               [24]  582 	movx	@dptr,a
+                                    583 ;	src/buzzer.c:190: if(out_z)
+      000025 30*00 08         [24]  584 	jnb	_out_z,00102$
+                                    585 ;	src/buzzer.c:191: PWM2_CCR3L = pwm_range;
+      000028 90 FE FA         [24]  586 	mov	dptr,#0xfefa
+      00002B E5*0B            [12]  587 	mov	a,_pwm_range
+      00002D F0               [24]  588 	movx	@dptr,a
+      00002E 80 05            [24]  589 	sjmp	00103$
+      000030                        590 00102$:
+                                    591 ;	src/buzzer.c:193: PWM2_CCR3L = 0;
+      000030 90 FE FA         [24]  592 	mov	dptr,#0xfefa
+      000033 E4               [12]  593 	clr	a
+      000034 F0               [24]  594 	movx	@dptr,a
+      000035                        595 00103$:
+                                    596 ;	src/buzzer.c:194: out_z = !out_z;
+      000035 B2*00            [12]  597 	cpl	_out_z
+                                    598 ;	src/buzzer.c:195: }
+      000037 D0 83            [24]  599 	pop	dph
+      000039 D0 82            [24]  600 	pop	dpl
+      00003B D0 E0            [24]  601 	pop	acc
+      00003D 32               [24]  602 	reti
+                                    603 ;	eliminated unneeded mov psw,# (no regs used in bank)
+                                    604 ;	eliminated unneeded push/pop not_psw
+                                    605 ;	eliminated unneeded push/pop b
+                                    606 ;------------------------------------------------------------
+                                    607 ;Allocation info for local variables in function 'pwm_enable'
+                                    608 ;------------------------------------------------------------
+                                    609 ;	src/buzzer.c:197: void pwm_enable(void)
+                                    610 ;	-----------------------------------------
+                                    611 ;	 function pwm_enable
+                                    612 ;	-----------------------------------------
+      00003E                        613 _pwm_enable:
+                                    614 ;	src/buzzer.c:199: PWMB_PS = 0x20;
+      00003E 90 FE B6         [24]  615 	mov	dptr,#0xfeb6
+      000041 74 20            [12]  616 	mov	a,#0x20
+      000043 F0               [24]  617 	movx	@dptr,a
+                                    618 ;	src/buzzer.c:200: PWMB_ENO   = 0x10;
+      000044 90 FE B5         [24]  619 	mov	dptr,#0xfeb5
+      000047 03               [12]  620 	rr	a
+      000048 F0               [24]  621 	movx	@dptr,a
+                                    622 ;	src/buzzer.c:201: PWMB_CCER2 = 0x00;
+      000049 90 FE ED         [24]  623 	mov	dptr,#0xfeed
+      00004C E4               [12]  624 	clr	a
+      00004D F0               [24]  625 	movx	@dptr,a
+                                    626 ;	src/buzzer.c:202: PWMB_CCMR3 = 0x60;
+      00004E 90 FE EA         [24]  627 	mov	dptr,#0xfeea
+      000051 74 60            [12]  628 	mov	a,#0x60
+      000053 F0               [24]  629 	movx	@dptr,a
+                                    630 ;	src/buzzer.c:203: PWMB_CCER2 = 0x01;
+      000054 90 FE ED         [24]  631 	mov	dptr,#0xfeed
+      000057 74 01            [12]  632 	mov	a,#0x01
+      000059 F0               [24]  633 	movx	@dptr,a
+                                    634 ;	src/buzzer.c:205: PWM2_CCR3H = 0;
+      00005A 90 FE F9         [24]  635 	mov	dptr,#0xfef9
+      00005D E4               [12]  636 	clr	a
+      00005E F0               [24]  637 	movx	@dptr,a
+                                    638 ;	src/buzzer.c:206: PWM2_CCR3L = 0;
+      00005F 90 FE FA         [24]  639 	mov	dptr,#0xfefa
+      000062 F0               [24]  640 	movx	@dptr,a
+                                    641 ;	src/buzzer.c:207: PWM2_ARRH = 1;
+      000063 90 FE F2         [24]  642 	mov	dptr,#0xfef2
+      000066 04               [12]  643 	inc	a
+      000067 F0               [24]  644 	movx	@dptr,a
+                                    645 ;	src/buzzer.c:208: PWM2_ARRL = 0;
+      000068 90 FE F3         [24]  646 	mov	dptr,#0xfef3
+      00006B E4               [12]  647 	clr	a
+      00006C F0               [24]  648 	movx	@dptr,a
+                                    649 ;	src/buzzer.c:210: PWMB_BKR   = 0x80;
+      00006D 90 FE FD         [24]  650 	mov	dptr,#0xfefd
+      000070 74 80            [12]  651 	mov	a,#0x80
+      000072 F0               [24]  652 	movx	@dptr,a
+                                    653 ;	src/buzzer.c:211: PWMB_CR1   = 0x01;
+      000073 90 FE E0         [24]  654 	mov	dptr,#0xfee0
+      000076 23               [12]  655 	rl	a
+      000077 F0               [24]  656 	movx	@dptr,a
+                                    657 ;	src/buzzer.c:212: }
+      000078 22               [24]  658 	ret
+                                    659 ;------------------------------------------------------------
+                                    660 ;Allocation info for local variables in function 'pwm_disable'
+                                    661 ;------------------------------------------------------------
+                                    662 ;	src/buzzer.c:214: void pwm_disable(void)
+                                    663 ;	-----------------------------------------
+                                    664 ;	 function pwm_disable
+                                    665 ;	-----------------------------------------
+      000079                        666 _pwm_disable:
+                                    667 ;	src/buzzer.c:216: PWMB_CR1 = 0x00;
+      000079 90 FE E0         [24]  668 	mov	dptr,#0xfee0
+      00007C E4               [12]  669 	clr	a
+      00007D F0               [24]  670 	movx	@dptr,a
+                                    671 ;	src/buzzer.c:217: PWMB_BKR = 0x00;
+      00007E 90 FE FD         [24]  672 	mov	dptr,#0xfefd
+      000081 F0               [24]  673 	movx	@dptr,a
+                                    674 ;	src/buzzer.c:218: PWMB_ENO = 0x00;
+      000082 90 FE B5         [24]  675 	mov	dptr,#0xfeb5
+      000085 F0               [24]  676 	movx	@dptr,a
+                                    677 ;	src/buzzer.c:219: BUZZ_OUT = 0;
+                                    678 ;	assignBit
+      000086 C2 82            [12]  679 	clr	_P02
+                                    680 ;	src/buzzer.c:220: }
+      000088 22               [24]  681 	ret
+                                    682 ;------------------------------------------------------------
+                                    683 ;Allocation info for local variables in function 'time_enable'
+                                    684 ;------------------------------------------------------------
+                                    685 ;	src/buzzer.c:222: void time_enable(void)
+                                    686 ;	-----------------------------------------
+                                    687 ;	 function time_enable
+                                    688 ;	-----------------------------------------
+      000089                        689 _time_enable:
+                                    690 ;	src/buzzer.c:224: PWM1_CNTRH = 0x00;
+      000089 90 FE CE         [24]  691 	mov	dptr,#0xfece
+      00008C E4               [12]  692 	clr	a
+      00008D F0               [24]  693 	movx	@dptr,a
+                                    694 ;	src/buzzer.c:225: PWM1_CNTRL = 0x00;
+      00008E 90 FE CF         [24]  695 	mov	dptr,#0xfecf
+      000091 F0               [24]  696 	movx	@dptr,a
+                                    697 ;	src/buzzer.c:227: PWM1_SR1 = 0x00;
+      000092 90 FE C5         [24]  698 	mov	dptr,#0xfec5
+      000095 F0               [24]  699 	movx	@dptr,a
+                                    700 ;	src/buzzer.c:228: PWM1_IER = 0x01;
+      000096 90 FE C4         [24]  701 	mov	dptr,#0xfec4
+      000099 04               [12]  702 	inc	a
+      00009A F0               [24]  703 	movx	@dptr,a
+                                    704 ;	src/buzzer.c:229: PWM1_CR1 = 0x01;
+      00009B 90 FE C0         [24]  705 	mov	dptr,#0xfec0
+      00009E F0               [24]  706 	movx	@dptr,a
+                                    707 ;	src/buzzer.c:230: }
+      00009F 22               [24]  708 	ret
+                                    709 ;------------------------------------------------------------
+                                    710 ;Allocation info for local variables in function 'time_disable'
+                                    711 ;------------------------------------------------------------
+                                    712 ;	src/buzzer.c:232: void time_disable(void)
+                                    713 ;	-----------------------------------------
+                                    714 ;	 function time_disable
+                                    715 ;	-----------------------------------------
+      0000A0                        716 _time_disable:
+                                    717 ;	src/buzzer.c:234: PWM1_CR1 = 0;
+      0000A0 90 FE C0         [24]  718 	mov	dptr,#0xfec0
+      0000A3 E4               [12]  719 	clr	a
+      0000A4 F0               [24]  720 	movx	@dptr,a
+                                    721 ;	src/buzzer.c:235: PWM1_IER = 0;
+      0000A5 90 FE C4         [24]  722 	mov	dptr,#0xfec4
+      0000A8 F0               [24]  723 	movx	@dptr,a
+                                    724 ;	src/buzzer.c:236: }
+      0000A9 22               [24]  725 	ret
+                                    726 ;------------------------------------------------------------
+                                    727 ;Allocation info for local variables in function 'buzzer_app'
+                                    728 ;------------------------------------------------------------
+                                    729 ;_lc                       Allocated with name '_buzzer_app__lc_65536_19'
+                                    730 ;------------------------------------------------------------
+                                    731 ;	src/buzzer.c:238: minisch_type_t buzzer_app(void)
+                                    732 ;	-----------------------------------------
+                                    733 ;	 function buzzer_app
+                                    734 ;	-----------------------------------------
+      0000AA                        735 _buzzer_app:
+                                    736 ;	src/buzzer.c:240: _SS
+      0000AA 74 1C            [12]  737 	mov	a,#0x1c
+      0000AC B5*0C 03         [24]  738 	cjne	a,_buzzer_app__lc_65536_19,00257$
+      0000AF 02r01r9A         [24]  739 	ljmp	00120$
+      0000B2                        740 00257$:
+      0000B2 74 25            [12]  741 	mov	a,#0x25
+      0000B4 B5*0C 03         [24]  742 	cjne	a,_buzzer_app__lc_65536_19,00258$
+      0000B7 02r01rF0         [24]  743 	ljmp	00126$
+      0000BA                        744 00258$:
+      0000BA 74 28            [12]  745 	mov	a,#0x28
+      0000BC B5*0C 03         [24]  746 	cjne	a,_buzzer_app__lc_65536_19,00259$
+      0000BF 02r02r14         [24]  747 	ljmp	00132$
+      0000C2                        748 00259$:
+      0000C2 74 33            [12]  749 	mov	a,#0x33
+      0000C4 B5*0C 03         [24]  750 	cjne	a,_buzzer_app__lc_65536_19,00260$
+      0000C7 02r02r93         [24]  751 	ljmp	00139$
+      0000CA                        752 00260$:
+      0000CA 74 36            [12]  753 	mov	a,#0x36
+      0000CC B5*0C 03         [24]  754 	cjne	a,_buzzer_app__lc_65536_19,00261$
+      0000CF 02r02rB7         [24]  755 	ljmp	00145$
+      0000D2                        756 00261$:
+      0000D2 74 F6            [12]  757 	mov	a,#0xf6
+      0000D4 B5*0C 02         [24]  758 	cjne	a,_buzzer_app__lc_65536_19,00262$
+      0000D7 80 10            [24]  759 	sjmp	00104$
+      0000D9                        760 00262$:
+                                    761 ;	src/buzzer.c:242: while(MINI_SCH_RUN)
+      0000D9                        762 00153$:
+      0000D9 20*00 03         [24]  763 	jb	_MINI_SCH_RUN,00263$
+      0000DC 02r02rD5         [24]  764 	ljmp	00156$
+      0000DF                        765 00263$:
+                                    766 ;	src/buzzer.c:244: WDT_CONTR = 0x36;
+      0000DF 75 C1 36         [24]  767 	mov	_WDT_CONTR,#0x36
+                                    768 ;	src/buzzer.c:245: WaitX(1);
+      0000E2 75*0C F6         [24]  769 	mov	_buzzer_app__lc_65536_19,#0xf6
+      0000E5 75 82 01         [24]  770 	mov	dpl,#0x01
+      0000E8 22               [24]  771 	ret
+      0000E9                        772 00104$:
+                                    773 ;	src/buzzer.c:246: if(sleep_time)
+      0000E9 E5*09            [12]  774 	mov	a,_sleep_time
+      0000EB 60 04            [24]  775 	jz	00109$
+                                    776 ;	src/buzzer.c:248: sleep_time--;
+      0000ED 15*09            [12]  777 	dec	_sleep_time
+      0000EF 80 09            [24]  778 	sjmp	00110$
+      0000F1                        779 00109$:
+                                    780 ;	src/buzzer.c:250: else if(shutdown_time)
+      0000F1 E5*0A            [12]  781 	mov	a,_shutdown_time
+      0000F3 60 05            [24]  782 	jz	00110$
+                                    783 ;	src/buzzer.c:252: shutdown_time--;
+      0000F5 15*0A            [12]  784 	dec	_shutdown_time
+                                    785 ;	src/buzzer.c:253: sleep_time = 200;
+      0000F7 75*09 C8         [24]  786 	mov	_sleep_time,#0xc8
+      0000FA                        787 00110$:
+                                    788 ;	src/buzzer.c:256: if(play_index == 0xff)
+      0000FA 74 FF            [12]  789 	mov	a,#0xff
+      0000FC B5*06 02         [24]  790 	cjne	a,_play_index,00266$
+      0000FF 80 D8            [24]  791 	sjmp	00153$
+      000101                        792 00266$:
+                                    793 ;	src/buzzer.c:259: shutdown_time = 30;
+      000101 75*0A 1E         [24]  794 	mov	_shutdown_time,#0x1e
+                                    795 ;	src/buzzer.c:260: pwm_enable();
+      000104 12r00r3E         [24]  796 	lcall	_pwm_enable
+                                    797 ;	src/buzzer.c:261: while(1)
+      000107                        798 00151$:
+                                    799 ;	src/buzzer.c:263: WDT_CONTR = 0x36;
+      000107 75 C1 36         [24]  800 	mov	_WDT_CONTR,#0x36
+                                    801 ;	src/buzzer.c:264: if(Musi_List[play_index][play_count] == 0xff)  
+      00010A E5*06            [12]  802 	mov	a,_play_index
+      00010C 25*06            [12]  803 	add	a,_play_index
+      00010E 24r00            [12]  804 	add	a,#_Musi_List
+      000110 F9               [12]  805 	mov	r1,a
+      000111 87 06            [24]  806 	mov	ar6,@r1
+      000113 09               [12]  807 	inc	r1
+      000114 87 07            [24]  808 	mov	ar7,@r1
+      000116 19               [12]  809 	dec	r1
+      000117 E5*07            [12]  810 	mov	a,_play_count
+      000119 2E               [12]  811 	add	a,r6
+      00011A F5 82            [12]  812 	mov	dpl,a
+      00011C E5*08            [12]  813 	mov	a,(_play_count + 1)
+      00011E 3F               [12]  814 	addc	a,r7
+      00011F F5 83            [12]  815 	mov	dph,a
+      000121 E4               [12]  816 	clr	a
+      000122 93               [24]  817 	movc	a,@a+dptr
+      000123 FF               [12]  818 	mov	r7,a
+      000124 BF FF 0B         [24]  819 	cjne	r7,#0xff,00114$
+                                    820 ;	src/buzzer.c:266: play_index = 0xff;
+      000127 75*06 FF         [24]  821 	mov	_play_index,#0xff
+                                    822 ;	src/buzzer.c:267: play_count = 0;
+      00012A E4               [12]  823 	clr	a
+      00012B F5*07            [12]  824 	mov	_play_count,a
+      00012D F5*08            [12]  825 	mov	(_play_count + 1),a
+                                    826 ;	src/buzzer.c:268: break;
+      00012F 02r02rCC         [24]  827 	ljmp	00152$
+      000132                        828 00114$:
+                                    829 ;	src/buzzer.c:271: if(Musical_Scale[Musi_List[play_index][play_count]])    
+      000132 EF               [12]  830 	mov	a,r7
+      000133 75 F0 02         [24]  831 	mov	b,#0x02
+      000136 A4               [48]  832 	mul	ab
+      000137 24r00            [12]  833 	add	a,#_Musical_Scale
+      000139 F5 82            [12]  834 	mov	dpl,a
+      00013B 74s00            [12]  835 	mov	a,#(_Musical_Scale >> 8)
+      00013D 35 F0            [12]  836 	addc	a,b
+      00013F F5 83            [12]  837 	mov	dph,a
+      000141 E4               [12]  838 	clr	a
+      000142 93               [24]  839 	movc	a,@a+dptr
+      000143 FE               [12]  840 	mov	r6,a
+      000144 A3               [24]  841 	inc	dptr
+      000145 E4               [12]  842 	clr	a
+      000146 93               [24]  843 	movc	a,@a+dptr
+      000147 FF               [12]  844 	mov	r7,a
+      000148 4E               [12]  845 	orl	a,r6
+      000149 60 43            [24]  846 	jz	00116$
+                                    847 ;	src/buzzer.c:273: PWM1_ARRH = (Musical_Scale[Musi_List[play_index][play_count]] / 2) / 256;
+      00014B EF               [12]  848 	mov	a,r7
+      00014C C3               [12]  849 	clr	c
+      00014D 13               [12]  850 	rrc	a
+      00014E CE               [12]  851 	xch	a,r6
+      00014F 13               [12]  852 	rrc	a
+      000150 CE               [12]  853 	xch	a,r6
+      000151 FE               [12]  854 	mov	r6,a
+      000152 90 FE D2         [24]  855 	mov	dptr,#0xfed2
+      000155 EE               [12]  856 	mov	a,r6
+      000156 F0               [24]  857 	movx	@dptr,a
+                                    858 ;	src/buzzer.c:274: PWM1_ARRL = (Musical_Scale[Musi_List[play_index][play_count]] / 2);
+      000157 87 06            [24]  859 	mov	ar6,@r1
+      000159 09               [12]  860 	inc	r1
+      00015A 87 07            [24]  861 	mov	ar7,@r1
+      00015C E5*07            [12]  862 	mov	a,_play_count
+      00015E 2E               [12]  863 	add	a,r6
+      00015F F5 82            [12]  864 	mov	dpl,a
+      000161 E5*08            [12]  865 	mov	a,(_play_count + 1)
+      000163 3F               [12]  866 	addc	a,r7
+      000164 F5 83            [12]  867 	mov	dph,a
+      000166 E4               [12]  868 	clr	a
+      000167 93               [24]  869 	movc	a,@a+dptr
+      000168 75 F0 02         [24]  870 	mov	b,#0x02
+      00016B A4               [48]  871 	mul	ab
+      00016C 24r00            [12]  872 	add	a,#_Musical_Scale
+      00016E F5 82            [12]  873 	mov	dpl,a
+      000170 74s00            [12]  874 	mov	a,#(_Musical_Scale >> 8)
+      000172 35 F0            [12]  875 	addc	a,b
+      000174 F5 83            [12]  876 	mov	dph,a
+      000176 E4               [12]  877 	clr	a
+      000177 93               [24]  878 	movc	a,@a+dptr
+      000178 FE               [12]  879 	mov	r6,a
+      000179 A3               [24]  880 	inc	dptr
+      00017A E4               [12]  881 	clr	a
+      00017B 93               [24]  882 	movc	a,@a+dptr
+      00017C C3               [12]  883 	clr	c
+      00017D 13               [12]  884 	rrc	a
+      00017E CE               [12]  885 	xch	a,r6
+      00017F 13               [12]  886 	rrc	a
+      000180 CE               [12]  887 	xch	a,r6
+      000181 90 FE D3         [24]  888 	mov	dptr,#0xfed3
+      000184 EE               [12]  889 	mov	a,r6
+      000185 F0               [24]  890 	movx	@dptr,a
+                                    891 ;	src/buzzer.c:275: time_enable();
+      000186 12r00r89         [24]  892 	lcall	_time_enable
+                                    893 ;	src/buzzer.c:276: pwm_range = 255;
+      000189 75*0B FF         [24]  894 	mov	_pwm_range,#0xff
+      00018C 80 05            [24]  895 	sjmp	00119$
+      00018E                        896 00116$:
+                                    897 ;	src/buzzer.c:280: PWM2_CCR3L = 0;
+      00018E 90 FE FA         [24]  898 	mov	dptr,#0xfefa
+      000191 E4               [12]  899 	clr	a
+      000192 F0               [24]  900 	movx	@dptr,a
+                                    901 ;	src/buzzer.c:282: WaitX(75);
+      000193                        902 00119$:
+      000193 75*0C 1C         [24]  903 	mov	_buzzer_app__lc_65536_19,#0x1c
+      000196 75 82 4B         [24]  904 	mov	dpl,#0x4b
+      000199 22               [24]  905 	ret
+      00019A                        906 00120$:
+                                    907 ;	src/buzzer.c:283: play_count++;
+      00019A 05*07            [12]  908 	inc	_play_count
+      00019C E4               [12]  909 	clr	a
+      00019D B5*07 02         [24]  910 	cjne	a,_play_count,00270$
+      0001A0 05*08            [12]  911 	inc	(_play_count + 1)
+      0001A2                        912 00270$:
+                                    913 ;	src/buzzer.c:284: sleep_time = Musi_List[play_index][play_count] - 15;
+      0001A2 E5*06            [12]  914 	mov	a,_play_index
+      0001A4 25*06            [12]  915 	add	a,_play_index
+      0001A6 24r00            [12]  916 	add	a,#_Musi_List
+      0001A8 F9               [12]  917 	mov	r1,a
+      0001A9 87 06            [24]  918 	mov	ar6,@r1
+      0001AB 09               [12]  919 	inc	r1
+      0001AC 87 07            [24]  920 	mov	ar7,@r1
+      0001AE E5*07            [12]  921 	mov	a,_play_count
+      0001B0 2E               [12]  922 	add	a,r6
+      0001B1 F5 82            [12]  923 	mov	dpl,a
+      0001B3 E5*08            [12]  924 	mov	a,(_play_count + 1)
+      0001B5 3F               [12]  925 	addc	a,r7
+      0001B6 F5 83            [12]  926 	mov	dph,a
+      0001B8 E4               [12]  927 	clr	a
+      0001B9 93               [24]  928 	movc	a,@a+dptr
+      0001BA FF               [12]  929 	mov	r7,a
+      0001BB 24 F1            [12]  930 	add	a,#0xf1
+      0001BD F5*09            [12]  931 	mov	_sleep_time,a
+                                    932 ;	src/buzzer.c:285: play_count++;
+      0001BF 05*07            [12]  933 	inc	_play_count
+      0001C1 E4               [12]  934 	clr	a
+      0001C2 B5*07 02         [24]  935 	cjne	a,_play_count,00271$
+      0001C5 05*08            [12]  936 	inc	(_play_count + 1)
+      0001C7                        937 00271$:
+      0001C7                        938 00158$:
+                                    939 ;	src/buzzer.c:287: for(;sleep_time > 0;sleep_time--)
+      0001C7 E5*09            [12]  940 	mov	a,_sleep_time
+      0001C9 60 4D            [24]  941 	jz	00134$
+                                    942 ;	src/buzzer.c:289: if(pwm_range)
+      0001CB E5*0B            [12]  943 	mov	a,_pwm_range
+      0001CD 60 1A            [24]  944 	jz	00125$
+                                    945 ;	src/buzzer.c:290: pwm_range -= ((pwm_range / 104) + 1);
+      0001CF AE*0B            [24]  946 	mov	r6,_pwm_range
+      0001D1 7F 00            [12]  947 	mov	r7,#0x00
+      0001D3 75*00 68         [24]  948 	mov	__divsint_PARM_2,#0x68
+                                    949 ;	1-genFromRTrack replaced	mov	(__divsint_PARM_2 + 1),#0x00
+      0001D6 8F*01            [24]  950 	mov	(__divsint_PARM_2 + 1),r7
+      0001D8 8E 82            [24]  951 	mov	dpl,r6
+      0001DA 8F 83            [24]  952 	mov	dph,r7
+      0001DC 12r00r00         [24]  953 	lcall	__divsint
+      0001DF AE 82            [24]  954 	mov	r6,dpl
+      0001E1 0E               [12]  955 	inc	r6
+      0001E2 E5*0B            [12]  956 	mov	a,_pwm_range
+      0001E4 FF               [12]  957 	mov	r7,a
+      0001E5 C3               [12]  958 	clr	c
+      0001E6 9E               [12]  959 	subb	a,r6
+      0001E7 F5*0B            [12]  960 	mov	_pwm_range,a
+                                    961 ;	src/buzzer.c:291: WaitX(2);
+      0001E9                        962 00125$:
+      0001E9 75*0C 25         [24]  963 	mov	_buzzer_app__lc_65536_19,#0x25
+      0001EC 75 82 02         [24]  964 	mov	dpl,#0x02
+      0001EF 22               [24]  965 	ret
+      0001F0                        966 00126$:
+                                    967 ;	src/buzzer.c:292: if(pwm_range)
+      0001F0 E5*0B            [12]  968 	mov	a,_pwm_range
+      0001F2 60 19            [24]  969 	jz	00131$
+                                    970 ;	src/buzzer.c:293: pwm_range -= (pwm_range / 88);
+      0001F4 AE*0B            [24]  971 	mov	r6,_pwm_range
+      0001F6 7F 00            [12]  972 	mov	r7,#0x00
+      0001F8 75*00 58         [24]  973 	mov	__divsint_PARM_2,#0x58
+                                    974 ;	1-genFromRTrack replaced	mov	(__divsint_PARM_2 + 1),#0x00
+      0001FB 8F*01            [24]  975 	mov	(__divsint_PARM_2 + 1),r7
+      0001FD 8E 82            [24]  976 	mov	dpl,r6
+      0001FF 8F 83            [24]  977 	mov	dph,r7
+      000201 12r00r00         [24]  978 	lcall	__divsint
+      000204 AE 82            [24]  979 	mov	r6,dpl
+      000206 E5*0B            [12]  980 	mov	a,_pwm_range
+      000208 FF               [12]  981 	mov	r7,a
+      000209 C3               [12]  982 	clr	c
+      00020A 9E               [12]  983 	subb	a,r6
+      00020B F5*0B            [12]  984 	mov	_pwm_range,a
+                                    985 ;	src/buzzer.c:294: WaitX(3);
+      00020D                        986 00131$:
+      00020D 75*0C 28         [24]  987 	mov	_buzzer_app__lc_65536_19,#0x28
+      000210 75 82 03         [24]  988 	mov	dpl,#0x03
+      000213 22               [24]  989 	ret
+      000214                        990 00132$:
+                                    991 ;	src/buzzer.c:287: for(;sleep_time > 0;sleep_time--)
+      000214 15*09            [12]  992 	dec	_sleep_time
+      000216 80 AF            [24]  993 	sjmp	00158$
+      000218                        994 00134$:
+                                    995 ;	src/buzzer.c:296: WDT_CONTR = 0x36;
+      000218 75 C1 36         [24]  996 	mov	_WDT_CONTR,#0x36
+                                    997 ;	src/buzzer.c:297: if(Musical_Scale[Musi_List[play_index][play_count]] == 0)   
+      00021B E5*06            [12]  998 	mov	a,_play_index
+      00021D 25*06            [12]  999 	add	a,_play_index
+      00021F 24r00            [12] 1000 	add	a,#_Musi_List
+      000221 F9               [12] 1001 	mov	r1,a
+      000222 87 06            [24] 1002 	mov	ar6,@r1
+      000224 09               [12] 1003 	inc	r1
+      000225 87 07            [24] 1004 	mov	ar7,@r1
+      000227 19               [12] 1005 	dec	r1
+      000228 E5*07            [12] 1006 	mov	a,_play_count
+      00022A 2E               [12] 1007 	add	a,r6
+      00022B F5 82            [12] 1008 	mov	dpl,a
+      00022D E5*08            [12] 1009 	mov	a,(_play_count + 1)
+      00022F 3F               [12] 1010 	addc	a,r7
+      000230 F5 83            [12] 1011 	mov	dph,a
+      000232 E4               [12] 1012 	clr	a
+      000233 93               [24] 1013 	movc	a,@a+dptr
+      000234 75 F0 02         [24] 1014 	mov	b,#0x02
+      000237 A4               [48] 1015 	mul	ab
+      000238 24r00            [12] 1016 	add	a,#_Musical_Scale
+      00023A F5 82            [12] 1017 	mov	dpl,a
+      00023C 74s00            [12] 1018 	mov	a,#(_Musical_Scale >> 8)
+      00023E 35 F0            [12] 1019 	addc	a,b
+      000240 F5 83            [12] 1020 	mov	dph,a
+      000242 E4               [12] 1021 	clr	a
+      000243 93               [24] 1022 	movc	a,@a+dptr
+      000244 FE               [12] 1023 	mov	r6,a
+      000245 A3               [24] 1024 	inc	dptr
+      000246 E4               [12] 1025 	clr	a
+      000247 93               [24] 1026 	movc	a,@a+dptr
+      000248 FF               [12] 1027 	mov	r7,a
+      000249 4E               [12] 1028 	orl	a,r6
+      00024A 60 03            [24] 1029 	jz	00275$
+      00024C 02r02rC3         [24] 1030 	ljmp	00149$
+      00024F                       1031 00275$:
+                                   1032 ;	src/buzzer.c:299: play_count++;
+      00024F 05*07            [12] 1033 	inc	_play_count
+      000251 E4               [12] 1034 	clr	a
+      000252 B5*07 02         [24] 1035 	cjne	a,_play_count,00276$
+      000255 05*08            [12] 1036 	inc	(_play_count + 1)
+      000257                       1037 00276$:
+                                   1038 ;	src/buzzer.c:300: sleep_time = Musi_List[play_index][play_count];
+      000257 87 06            [24] 1039 	mov	ar6,@r1
+      000259 09               [12] 1040 	inc	r1
+      00025A 87 07            [24] 1041 	mov	ar7,@r1
+      00025C E5*07            [12] 1042 	mov	a,_play_count
+      00025E 2E               [12] 1043 	add	a,r6
+      00025F F5 82            [12] 1044 	mov	dpl,a
+      000261 E5*08            [12] 1045 	mov	a,(_play_count + 1)
+      000263 3F               [12] 1046 	addc	a,r7
+      000264 F5 83            [12] 1047 	mov	dph,a
+      000266 E4               [12] 1048 	clr	a
+      000267 93               [24] 1049 	movc	a,@a+dptr
+      000268 F5*09            [12] 1050 	mov	_sleep_time,a
+      00026A                       1051 00161$:
+                                   1052 ;	src/buzzer.c:301: for(;sleep_time > 0;sleep_time--)
+      00026A E5*09            [12] 1053 	mov	a,_sleep_time
+      00026C 60 4D            [24] 1054 	jz	00147$
+                                   1055 ;	src/buzzer.c:303: if(pwm_range)
+      00026E E5*0B            [12] 1056 	mov	a,_pwm_range
+      000270 60 1A            [24] 1057 	jz	00138$
+                                   1058 ;	src/buzzer.c:304: pwm_range -= ((pwm_range / 104) + 1);
+      000272 AE*0B            [24] 1059 	mov	r6,_pwm_range
+      000274 7F 00            [12] 1060 	mov	r7,#0x00
+      000276 75*00 68         [24] 1061 	mov	__divsint_PARM_2,#0x68
+                                   1062 ;	1-genFromRTrack replaced	mov	(__divsint_PARM_2 + 1),#0x00
+      000279 8F*01            [24] 1063 	mov	(__divsint_PARM_2 + 1),r7
+      00027B 8E 82            [24] 1064 	mov	dpl,r6
+      00027D 8F 83            [24] 1065 	mov	dph,r7
+      00027F 12r00r00         [24] 1066 	lcall	__divsint
+      000282 AE 82            [24] 1067 	mov	r6,dpl
+      000284 0E               [12] 1068 	inc	r6
+      000285 E5*0B            [12] 1069 	mov	a,_pwm_range
+      000287 FF               [12] 1070 	mov	r7,a
+      000288 C3               [12] 1071 	clr	c
+      000289 9E               [12] 1072 	subb	a,r6
+      00028A F5*0B            [12] 1073 	mov	_pwm_range,a
+                                   1074 ;	src/buzzer.c:305: WaitX(2);
+      00028C                       1075 00138$:
+      00028C 75*0C 33         [24] 1076 	mov	_buzzer_app__lc_65536_19,#0x33
+      00028F 75 82 02         [24] 1077 	mov	dpl,#0x02
+      000292 22               [24] 1078 	ret
+      000293                       1079 00139$:
+                                   1080 ;	src/buzzer.c:306: if(pwm_range)
+      000293 E5*0B            [12] 1081 	mov	a,_pwm_range
+      000295 60 19            [24] 1082 	jz	00144$
+                                   1083 ;	src/buzzer.c:307: pwm_range -= (pwm_range / 88);
+      000297 AE*0B            [24] 1084 	mov	r6,_pwm_range
+      000299 7F 00            [12] 1085 	mov	r7,#0x00
+      00029B 75*00 58         [24] 1086 	mov	__divsint_PARM_2,#0x58
+                                   1087 ;	1-genFromRTrack replaced	mov	(__divsint_PARM_2 + 1),#0x00
+      00029E 8F*01            [24] 1088 	mov	(__divsint_PARM_2 + 1),r7
+      0002A0 8E 82            [24] 1089 	mov	dpl,r6
+      0002A2 8F 83            [24] 1090 	mov	dph,r7
+      0002A4 12r00r00         [24] 1091 	lcall	__divsint
+      0002A7 AE 82            [24] 1092 	mov	r6,dpl
+      0002A9 E5*0B            [12] 1093 	mov	a,_pwm_range
+      0002AB FF               [12] 1094 	mov	r7,a
+      0002AC C3               [12] 1095 	clr	c
+      0002AD 9E               [12] 1096 	subb	a,r6
+      0002AE F5*0B            [12] 1097 	mov	_pwm_range,a
+                                   1098 ;	src/buzzer.c:308: WaitX(3);
+      0002B0                       1099 00144$:
+      0002B0 75*0C 36         [24] 1100 	mov	_buzzer_app__lc_65536_19,#0x36
+      0002B3 75 82 03         [24] 1101 	mov	dpl,#0x03
+      0002B6 22               [24] 1102 	ret
+      0002B7                       1103 00145$:
+                                   1104 ;	src/buzzer.c:301: for(;sleep_time > 0;sleep_time--)
+      0002B7 15*09            [12] 1105 	dec	_sleep_time
+      0002B9 80 AF            [24] 1106 	sjmp	00161$
+      0002BB                       1107 00147$:
+                                   1108 ;	src/buzzer.c:310: play_count++;
+      0002BB 05*07            [12] 1109 	inc	_play_count
+      0002BD E4               [12] 1110 	clr	a
+      0002BE B5*07 02         [24] 1111 	cjne	a,_play_count,00280$
+      0002C1 05*08            [12] 1112 	inc	(_play_count + 1)
+      0002C3                       1113 00280$:
+      0002C3                       1114 00149$:
+                                   1115 ;	src/buzzer.c:313: time_disable();
+      0002C3 12r00rA0         [24] 1116 	lcall	_time_disable
+                                   1117 ;	src/buzzer.c:314: pwm_range = 0;
+      0002C6 75*0B 00         [24] 1118 	mov	_pwm_range,#0x00
+      0002C9 02r01r07         [24] 1119 	ljmp	00151$
+      0002CC                       1120 00152$:
+                                   1121 ;	src/buzzer.c:316: pwm_disable();
+      0002CC 12r00r79         [24] 1122 	lcall	_pwm_disable
+                                   1123 ;	src/buzzer.c:317: sleep_time = 200;
+      0002CF 75*09 C8         [24] 1124 	mov	_sleep_time,#0xc8
+      0002D2 02r00rD9         [24] 1125 	ljmp	00153$
+                                   1126 ;	src/buzzer.c:320: _EE
+      0002D5                       1127 00156$:
+      0002D5 75*0C 00         [24] 1128 	mov	_buzzer_app__lc_65536_19,#0x00
+      0002D8 75 82 FF         [24] 1129 	mov	dpl,#0xff
+                                   1130 ;	src/buzzer.c:321: }
+      0002DB 22               [24] 1131 	ret
+                                   1132 	.area CSEG    (CODE)
+                                   1133 	.area CONST   (CODE)
+      000000                       1134 _Musical_Scale:
+      000000 20 A5                 1135 	.byte #0x20, #0xa5	; 42272
+      000002 DA 9B                 1136 	.byte #0xda, #0x9b	; 39898
+      000004 1C 93                 1137 	.byte #0x1c, #0x93	; 37660
+      000006 DA 8A                 1138 	.byte #0xda, #0x8a	; 35546
+      000008 0E 83                 1139 	.byte #0x0e, #0x83	; 33550
+      00000A B4 7B                 1140 	.byte #0xb4, #0x7b	; 31668
+      00000C C2 74                 1141 	.byte #0xc2, #0x74	; 29890
+      00000E 34 6E                 1142 	.byte #0x34, #0x6e	; 28212
+      000010 06 68                 1143 	.byte #0x06, #0x68	; 26630
+      000012 2E 62                 1144 	.byte #0x2e, #0x62	; 25134
+      000014 AC 5C                 1145 	.byte #0xac, #0x5c	; 23724
+      000016 78 57                 1146 	.byte #0x78, #0x57	; 22392
+      000018 90 52                 1147 	.byte #0x90, #0x52	; 21136
+      00001A EE 4D                 1148 	.byte #0xee, #0x4d	; 19950
+      00001C 8C 49                 1149 	.byte #0x8c, #0x49	; 18828
+      00001E 6C 45                 1150 	.byte #0x6c, #0x45	; 17772
+      000020 88 41                 1151 	.byte #0x88, #0x41	; 16776
+      000022 DA 3D                 1152 	.byte #0xda, #0x3d	; 15834
+      000024 60 3A                 1153 	.byte #0x60, #0x3a	; 14944
+      000026 1A 37                 1154 	.byte #0x1a, #0x37	; 14106
+      000028 02 34                 1155 	.byte #0x02, #0x34	; 13314
+      00002A 18 31                 1156 	.byte #0x18, #0x31	; 12568
+      00002C 56 2E                 1157 	.byte #0x56, #0x2e	; 11862
+      00002E BC 2B                 1158 	.byte #0xbc, #0x2b	; 11196
+      000030 48 29                 1159 	.byte #0x48, #0x29	; 10568
+      000032 F6 26                 1160 	.byte #0xf6, #0x26	; 9974
+      000034 C6 24                 1161 	.byte #0xc6, #0x24	; 9414
+      000036 B6 22                 1162 	.byte #0xb6, #0x22	; 8886
+      000038 C4 20                 1163 	.byte #0xc4, #0x20	; 8388
+      00003A F0 1E                 1164 	.byte #0xf0, #0x1e	; 7920
+      00003C 30 1D                 1165 	.byte #0x30, #0x1d	; 7472
+      00003E 8E 1B                 1166 	.byte #0x8e, #0x1b	; 7054
+      000040 02 1A                 1167 	.byte #0x02, #0x1a	; 6658
+      000042 8C 18                 1168 	.byte #0x8c, #0x18	; 6284
+      000044 2A 17                 1169 	.byte #0x2a, #0x17	; 5930
+      000046 DE 15                 1170 	.byte #0xde, #0x15	; 5598
+      000048 00 00                 1171 	.byte #0x00, #0x00	; 0
+      00004A                       1172 _two_tigers:
+      00004A 0C                    1173 	.db #0x0c	; 12
+      00004B 32                    1174 	.db #0x32	; 50	'2'
+      00004C 0E                    1175 	.db #0x0e	; 14
+      00004D 32                    1176 	.db #0x32	; 50	'2'
+      00004E 10                    1177 	.db #0x10	; 16
+      00004F 32                    1178 	.db #0x32	; 50	'2'
+      000050 0C                    1179 	.db #0x0c	; 12
+      000051 32                    1180 	.db #0x32	; 50	'2'
+      000052 0C                    1181 	.db #0x0c	; 12
+      000053 32                    1182 	.db #0x32	; 50	'2'
+      000054 0E                    1183 	.db #0x0e	; 14
+      000055 32                    1184 	.db #0x32	; 50	'2'
+      000056 10                    1185 	.db #0x10	; 16
+      000057 32                    1186 	.db #0x32	; 50	'2'
+      000058 0C                    1187 	.db #0x0c	; 12
+      000059 32                    1188 	.db #0x32	; 50	'2'
+      00005A 10                    1189 	.db #0x10	; 16
+      00005B 32                    1190 	.db #0x32	; 50	'2'
+      00005C 11                    1191 	.db #0x11	; 17
+      00005D 32                    1192 	.db #0x32	; 50	'2'
+      00005E 13                    1193 	.db #0x13	; 19
+      00005F 64                    1194 	.db #0x64	; 100	'd'
+      000060 10                    1195 	.db #0x10	; 16
+      000061 32                    1196 	.db #0x32	; 50	'2'
+      000062 11                    1197 	.db #0x11	; 17
+      000063 32                    1198 	.db #0x32	; 50	'2'
+      000064 13                    1199 	.db #0x13	; 19
+      000065 64                    1200 	.db #0x64	; 100	'd'
+      000066 13                    1201 	.db #0x13	; 19
+      000067 19                    1202 	.db #0x19	; 25
+      000068 15                    1203 	.db #0x15	; 21
+      000069 19                    1204 	.db #0x19	; 25
+      00006A 13                    1205 	.db #0x13	; 19
+      00006B 19                    1206 	.db #0x19	; 25
+      00006C 11                    1207 	.db #0x11	; 17
+      00006D 19                    1208 	.db #0x19	; 25
+      00006E 10                    1209 	.db #0x10	; 16
+      00006F 32                    1210 	.db #0x32	; 50	'2'
+      000070 0C                    1211 	.db #0x0c	; 12
+      000071 32                    1212 	.db #0x32	; 50	'2'
+      000072 13                    1213 	.db #0x13	; 19
+      000073 19                    1214 	.db #0x19	; 25
+      000074 15                    1215 	.db #0x15	; 21
+      000075 19                    1216 	.db #0x19	; 25
+      000076 13                    1217 	.db #0x13	; 19
+      000077 19                    1218 	.db #0x19	; 25
+      000078 11                    1219 	.db #0x11	; 17
+      000079 19                    1220 	.db #0x19	; 25
+      00007A 10                    1221 	.db #0x10	; 16
+      00007B 32                    1222 	.db #0x32	; 50	'2'
+      00007C 0C                    1223 	.db #0x0c	; 12
+      00007D 32                    1224 	.db #0x32	; 50	'2'
+      00007E 10                    1225 	.db #0x10	; 16
+      00007F 32                    1226 	.db #0x32	; 50	'2'
+      000080 07                    1227 	.db #0x07	; 7
+      000081 32                    1228 	.db #0x32	; 50	'2'
+      000082 0E                    1229 	.db #0x0e	; 14
+      000083 64                    1230 	.db #0x64	; 100	'd'
+      000084 10                    1231 	.db #0x10	; 16
+      000085 32                    1232 	.db #0x32	; 50	'2'
+      000086 07                    1233 	.db #0x07	; 7
+      000087 32                    1234 	.db #0x32	; 50	'2'
+      000088 0E                    1235 	.db #0x0e	; 14
+      000089 64                    1236 	.db #0x64	; 100	'd'
+      00008A 24                    1237 	.db #0x24	; 36
+      00008B FA                    1238 	.db #0xfa	; 250
+      00008C FF                    1239 	.db #0xff	; 255
+      00008D                       1240 _qfl:
+      00008D 0E                    1241 	.db #0x0e	; 14
+      00008E 5A                    1242 	.db #0x5a	; 90	'Z'
+      00008F 0C                    1243 	.db #0x0c	; 12
+      000090 1E                    1244 	.db #0x1e	; 30
+      000091 0E                    1245 	.db #0x0e	; 14
+      000092 5A                    1246 	.db #0x5a	; 90	'Z'
+      000093 0C                    1247 	.db #0x0c	; 12
+      000094 1E                    1248 	.db #0x1e	; 30
+      000095 0E                    1249 	.db #0x0e	; 14
+      000096 3C                    1250 	.db #0x3c	; 60
+      000097 10                    1251 	.db #0x10	; 16
+      000098 3C                    1252 	.db #0x3c	; 60
+      000099 13                    1253 	.db #0x13	; 19
+      00009A 3C                    1254 	.db #0x3c	; 60
+      00009B 10                    1255 	.db #0x10	; 16
+      00009C 3C                    1256 	.db #0x3c	; 60
+      00009D 0E                    1257 	.db #0x0e	; 14
+      00009E 5A                    1258 	.db #0x5a	; 90	'Z'
+      00009F 0C                    1259 	.db #0x0c	; 12
+      0000A0 1E                    1260 	.db #0x1e	; 30
+      0000A1 0E                    1261 	.db #0x0e	; 14
+      0000A2 5A                    1262 	.db #0x5a	; 90	'Z'
+      0000A3 0C                    1263 	.db #0x0c	; 12
+      0000A4 1E                    1264 	.db #0x1e	; 30
+      0000A5 0E                    1265 	.db #0x0e	; 14
+      0000A6 1E                    1266 	.db #0x1e	; 30
+      0000A7 10                    1267 	.db #0x10	; 16
+      0000A8 1E                    1268 	.db #0x1e	; 30
+      0000A9 0E                    1269 	.db #0x0e	; 14
+      0000AA 1E                    1270 	.db #0x1e	; 30
+      0000AB 0C                    1271 	.db #0x0c	; 12
+      0000AC 1E                    1272 	.db #0x1e	; 30
+      0000AD 09                    1273 	.db #0x09	; 9
+      0000AE 78                    1274 	.db #0x78	; 120	'x'
+      0000AF 0E                    1275 	.db #0x0e	; 14
+      0000B0 5A                    1276 	.db #0x5a	; 90	'Z'
+      0000B1 0C                    1277 	.db #0x0c	; 12
+      0000B2 1E                    1278 	.db #0x1e	; 30
+      0000B3 0E                    1279 	.db #0x0e	; 14
+      0000B4 5A                    1280 	.db #0x5a	; 90	'Z'
+      0000B5 0C                    1281 	.db #0x0c	; 12
+      0000B6 1E                    1282 	.db #0x1e	; 30
+      0000B7 0E                    1283 	.db #0x0e	; 14
+      0000B8 3C                    1284 	.db #0x3c	; 60
+      0000B9 10                    1285 	.db #0x10	; 16
+      0000BA 3C                    1286 	.db #0x3c	; 60
+      0000BB 13                    1287 	.db #0x13	; 19
+      0000BC 3C                    1288 	.db #0x3c	; 60
+      0000BD 10                    1289 	.db #0x10	; 16
+      0000BE 3C                    1290 	.db #0x3c	; 60
+      0000BF 0E                    1291 	.db #0x0e	; 14
+      0000C0 5A                    1292 	.db #0x5a	; 90	'Z'
+      0000C1 0C                    1293 	.db #0x0c	; 12
+      0000C2 1E                    1294 	.db #0x1e	; 30
+      0000C3 0E                    1295 	.db #0x0e	; 14
+      0000C4 3C                    1296 	.db #0x3c	; 60
+      0000C5 0C                    1297 	.db #0x0c	; 12
+      0000C6 3C                    1298 	.db #0x3c	; 60
+      0000C7 0E                    1299 	.db #0x0e	; 14
+      0000C8 F0                    1300 	.db #0xf0	; 240
+      0000C9 0E                    1301 	.db #0x0e	; 14
+      0000CA 5A                    1302 	.db #0x5a	; 90	'Z'
+      0000CB 0C                    1303 	.db #0x0c	; 12
+      0000CC 1E                    1304 	.db #0x1e	; 30
+      0000CD 0E                    1305 	.db #0x0e	; 14
+      0000CE 5A                    1306 	.db #0x5a	; 90	'Z'
+      0000CF 0C                    1307 	.db #0x0c	; 12
+      0000D0 1E                    1308 	.db #0x1e	; 30
+      0000D1 0E                    1309 	.db #0x0e	; 14
+      0000D2 3C                    1310 	.db #0x3c	; 60
+      0000D3 10                    1311 	.db #0x10	; 16
+      0000D4 3C                    1312 	.db #0x3c	; 60
+      0000D5 13                    1313 	.db #0x13	; 19
+      0000D6 3C                    1314 	.db #0x3c	; 60
+      0000D7 10                    1315 	.db #0x10	; 16
+      0000D8 3C                    1316 	.db #0x3c	; 60
+      0000D9 0E                    1317 	.db #0x0e	; 14
+      0000DA 5A                    1318 	.db #0x5a	; 90	'Z'
+      0000DB 0C                    1319 	.db #0x0c	; 12
+      0000DC 1E                    1320 	.db #0x1e	; 30
+      0000DD 0E                    1321 	.db #0x0e	; 14
+      0000DE 3C                    1322 	.db #0x3c	; 60
+      0000DF 0C                    1323 	.db #0x0c	; 12
+      0000E0 3C                    1324 	.db #0x3c	; 60
+      0000E1 09                    1325 	.db #0x09	; 9
+      0000E2 78                    1326 	.db #0x78	; 120	'x'
+      0000E3 10                    1327 	.db #0x10	; 16
+      0000E4 1E                    1328 	.db #0x1e	; 30
+      0000E5 0E                    1329 	.db #0x0e	; 14
+      0000E6 1E                    1330 	.db #0x1e	; 30
+      0000E7 0C                    1331 	.db #0x0c	; 12
+      0000E8 1E                    1332 	.db #0x1e	; 30
+      0000E9 0E                    1333 	.db #0x0e	; 14
+      0000EA 1E                    1334 	.db #0x1e	; 30
+      0000EB 0C                    1335 	.db #0x0c	; 12
+      0000EC 78                    1336 	.db #0x78	; 120	'x'
+      0000ED 10                    1337 	.db #0x10	; 16
+      0000EE 1E                    1338 	.db #0x1e	; 30
+      0000EF 0E                    1339 	.db #0x0e	; 14
+      0000F0 1E                    1340 	.db #0x1e	; 30
+      0000F1 0C                    1341 	.db #0x0c	; 12
+      0000F2 1E                    1342 	.db #0x1e	; 30
+      0000F3 0E                    1343 	.db #0x0e	; 14
+      0000F4 1E                    1344 	.db #0x1e	; 30
+      0000F5 0C                    1345 	.db #0x0c	; 12
+      0000F6 5A                    1346 	.db #0x5a	; 90	'Z'
+      0000F7 07                    1347 	.db #0x07	; 7
+      0000F8 1E                    1348 	.db #0x1e	; 30
+      0000F9 10                    1349 	.db #0x10	; 16
+      0000FA 1E                    1350 	.db #0x1e	; 30
+      0000FB 0E                    1351 	.db #0x0e	; 14
+      0000FC 1E                    1352 	.db #0x1e	; 30
+      0000FD 0C                    1353 	.db #0x0c	; 12
+      0000FE 1E                    1354 	.db #0x1e	; 30
+      0000FF 0E                    1355 	.db #0x0e	; 14
+      000100 1E                    1356 	.db #0x1e	; 30
+      000101 0C                    1357 	.db #0x0c	; 12
+      000102 F0                    1358 	.db #0xf0	; 240
+      000103 0C                    1359 	.db #0x0c	; 12
+      000104 3C                    1360 	.db #0x3c	; 60
+      000105 0E                    1361 	.db #0x0e	; 14
+      000106 3C                    1362 	.db #0x3c	; 60
+      000107 10                    1363 	.db #0x10	; 16
+      000108 3C                    1364 	.db #0x3c	; 60
+      000109 0C                    1365 	.db #0x0c	; 12
+      00010A 3C                    1366 	.db #0x3c	; 60
+      00010B 15                    1367 	.db #0x15	; 21
+      00010C 3C                    1368 	.db #0x3c	; 60
+      00010D 13                    1369 	.db #0x13	; 19
+      00010E 1E                    1370 	.db #0x1e	; 30
+      00010F 15                    1371 	.db #0x15	; 21
+      000110 78                    1372 	.db #0x78	; 120	'x'
+      000111 0C                    1373 	.db #0x0c	; 12
+      000112 1E                    1374 	.db #0x1e	; 30
+      000113 17                    1375 	.db #0x17	; 23
+      000114 3C                    1376 	.db #0x3c	; 60
+      000115 15                    1377 	.db #0x15	; 21
+      000116 1E                    1378 	.db #0x1e	; 30
+      000117 17                    1379 	.db #0x17	; 23
+      000118 96                    1380 	.db #0x96	; 150
+      000119 17                    1381 	.db #0x17	; 23
+      00011A 3C                    1382 	.db #0x3c	; 60
+      00011B 15                    1383 	.db #0x15	; 21
+      00011C 1E                    1384 	.db #0x1e	; 30
+      00011D 17                    1385 	.db #0x17	; 23
+      00011E 1E                    1386 	.db #0x1e	; 30
+      00011F 24                    1387 	.db #0x24	; 36
+      000120 3C                    1388 	.db #0x3c	; 60
+      000121 10                    1389 	.db #0x10	; 16
+      000122 3C                    1390 	.db #0x3c	; 60
+      000123 18                    1391 	.db #0x18	; 24
+      000124 1E                    1392 	.db #0x1e	; 30
+      000125 1A                    1393 	.db #0x1a	; 26
+      000126 1E                    1394 	.db #0x1e	; 30
+      000127 18                    1395 	.db #0x18	; 24
+      000128 1E                    1396 	.db #0x1e	; 30
+      000129 17                    1397 	.db #0x17	; 23
+      00012A 1E                    1398 	.db #0x1e	; 30
+      00012B 15                    1399 	.db #0x15	; 21
+      00012C 3C                    1400 	.db #0x3c	; 60
+      00012D 13                    1401 	.db #0x13	; 19
+      00012E 3C                    1402 	.db #0x3c	; 60
+      00012F 15                    1403 	.db #0x15	; 21
+      000130 3C                    1404 	.db #0x3c	; 60
+      000131 13                    1405 	.db #0x13	; 19
+      000132 1E                    1406 	.db #0x1e	; 30
+      000133 15                    1407 	.db #0x15	; 21
+      000134 1E                    1408 	.db #0x1e	; 30
+      000135 24                    1409 	.db #0x24	; 36
+      000136 1E                    1410 	.db #0x1e	; 30
+      000137 13                    1411 	.db #0x13	; 19
+      000138 1E                    1412 	.db #0x1e	; 30
+      000139 15                    1413 	.db #0x15	; 21
+      00013A 1E                    1414 	.db #0x1e	; 30
+      00013B 13                    1415 	.db #0x13	; 19
+      00013C 1E                    1416 	.db #0x1e	; 30
+      00013D 15                    1417 	.db #0x15	; 21
+      00013E 3C                    1418 	.db #0x3c	; 60
+      00013F 13                    1419 	.db #0x13	; 19
+      000140 1E                    1420 	.db #0x1e	; 30
+      000141 0E                    1421 	.db #0x0e	; 14
+      000142 1E                    1422 	.db #0x1e	; 30
+      000143 24                    1423 	.db #0x24	; 36
+      000144 3C                    1424 	.db #0x3c	; 60
+      000145 13                    1425 	.db #0x13	; 19
+      000146 3C                    1426 	.db #0x3c	; 60
+      000147 10                    1427 	.db #0x10	; 16
+      000148 78                    1428 	.db #0x78	; 120	'x'
+      000149 24                    1429 	.db #0x24	; 36
+      00014A 78                    1430 	.db #0x78	; 120	'x'
+      00014B 0C                    1431 	.db #0x0c	; 12
+      00014C 3C                    1432 	.db #0x3c	; 60
+      00014D 0E                    1433 	.db #0x0e	; 14
+      00014E 3C                    1434 	.db #0x3c	; 60
+      00014F 10                    1435 	.db #0x10	; 16
+      000150 3C                    1436 	.db #0x3c	; 60
+      000151 0C                    1437 	.db #0x0c	; 12
+      000152 3C                    1438 	.db #0x3c	; 60
+      000153 15                    1439 	.db #0x15	; 21
+      000154 3C                    1440 	.db #0x3c	; 60
+      000155 13                    1441 	.db #0x13	; 19
+      000156 1E                    1442 	.db #0x1e	; 30
+      000157 15                    1443 	.db #0x15	; 21
+      000158 1E                    1444 	.db #0x1e	; 30
+      000159 24                    1445 	.db #0x24	; 36
+      00015A 5A                    1446 	.db #0x5a	; 90	'Z'
+      00015B 0C                    1447 	.db #0x0c	; 12
+      00015C 1E                    1448 	.db #0x1e	; 30
+      00015D 17                    1449 	.db #0x17	; 23
+      00015E 3C                    1450 	.db #0x3c	; 60
+      00015F 15                    1451 	.db #0x15	; 21
+      000160 1E                    1452 	.db #0x1e	; 30
+      000161 17                    1453 	.db #0x17	; 23
+      000162 1E                    1454 	.db #0x1e	; 30
+      000163 24                    1455 	.db #0x24	; 36
+      000164 78                    1456 	.db #0x78	; 120	'x'
+      000165 17                    1457 	.db #0x17	; 23
+      000166 3C                    1458 	.db #0x3c	; 60
+      000167 15                    1459 	.db #0x15	; 21
+      000168 1E                    1460 	.db #0x1e	; 30
+      000169 17                    1461 	.db #0x17	; 23
+      00016A 1E                    1462 	.db #0x1e	; 30
+      00016B 24                    1463 	.db #0x24	; 36
+      00016C 3C                    1464 	.db #0x3c	; 60
+      00016D 10                    1465 	.db #0x10	; 16
+      00016E 3C                    1466 	.db #0x3c	; 60
+      00016F 18                    1467 	.db #0x18	; 24
+      000170 1E                    1468 	.db #0x1e	; 30
+      000171 1A                    1469 	.db #0x1a	; 26
+      000172 1E                    1470 	.db #0x1e	; 30
+      000173 18                    1471 	.db #0x18	; 24
+      000174 1E                    1472 	.db #0x1e	; 30
+      000175 17                    1473 	.db #0x17	; 23
+      000176 1E                    1474 	.db #0x1e	; 30
+      000177 15                    1475 	.db #0x15	; 21
+      000178 3C                    1476 	.db #0x3c	; 60
+      000179 13                    1477 	.db #0x13	; 19
+      00017A 3C                    1478 	.db #0x3c	; 60
+      00017B 15                    1479 	.db #0x15	; 21
+      00017C 3C                    1480 	.db #0x3c	; 60
+      00017D 1C                    1481 	.db #0x1c	; 28
+      00017E 1E                    1482 	.db #0x1e	; 30
+      00017F 1C                    1483 	.db #0x1c	; 28
+      000180 1E                    1484 	.db #0x1e	; 30
+      000181 24                    1485 	.db #0x24	; 36
+      000182 3C                    1486 	.db #0x3c	; 60
+      000183 13                    1487 	.db #0x13	; 19
+      000184 3C                    1488 	.db #0x3c	; 60
+      000185 15                    1489 	.db #0x15	; 21
+      000186 3C                    1490 	.db #0x3c	; 60
+      000187 1C                    1491 	.db #0x1c	; 28
+      000188 1E                    1492 	.db #0x1e	; 30
+      000189 1C                    1493 	.db #0x1c	; 28
+      00018A 1E                    1494 	.db #0x1e	; 30
+      00018B 24                    1495 	.db #0x24	; 36
+      00018C 3C                    1496 	.db #0x3c	; 60
+      00018D 13                    1497 	.db #0x13	; 19
+      00018E 3C                    1498 	.db #0x3c	; 60
+      00018F 15                    1499 	.db #0x15	; 21
+      000190 78                    1500 	.db #0x78	; 120	'x'
+      000191 24                    1501 	.db #0x24	; 36
+      000192 F0                    1502 	.db #0xf0	; 240
+      000193 18                    1503 	.db #0x18	; 24
+      000194 3C                    1504 	.db #0x3c	; 60
+      000195 1A                    1505 	.db #0x1a	; 26
+      000196 3C                    1506 	.db #0x3c	; 60
+      000197 1C                    1507 	.db #0x1c	; 28
+      000198 3C                    1508 	.db #0x3c	; 60
+      000199 21                    1509 	.db #0x21	; 33
+      00019A 1E                    1510 	.db #0x1e	; 30
+      00019B 1F                    1511 	.db #0x1f	; 31
+      00019C 1E                    1512 	.db #0x1e	; 30
+      00019D 24                    1513 	.db #0x24	; 36
+      00019E 3C                    1514 	.db #0x3c	; 60
+      00019F 21                    1515 	.db #0x21	; 33
+      0001A0 1E                    1516 	.db #0x1e	; 30
+      0001A1 1F                    1517 	.db #0x1f	; 31
+      0001A2 1E                    1518 	.db #0x1e	; 30
+      0001A3 24                    1519 	.db #0x24	; 36
+      0001A4 3C                    1520 	.db #0x3c	; 60
+      0001A5 21                    1521 	.db #0x21	; 33
+      0001A6 1E                    1522 	.db #0x1e	; 30
+      0001A7 1F                    1523 	.db #0x1f	; 31
+      0001A8 1E                    1524 	.db #0x1e	; 30
+      0001A9 24                    1525 	.db #0x24	; 36
+      0001AA 3C                    1526 	.db #0x3c	; 60
+      0001AB 1A                    1527 	.db #0x1a	; 26
+      0001AC 1E                    1528 	.db #0x1e	; 30
+      0001AD 1C                    1529 	.db #0x1c	; 28
+      0001AE 1E                    1530 	.db #0x1e	; 30
+      0001AF 24                    1531 	.db #0x24	; 36
+      0001B0 3C                    1532 	.db #0x3c	; 60
+      0001B1 21                    1533 	.db #0x21	; 33
+      0001B2 1E                    1534 	.db #0x1e	; 30
+      0001B3 1F                    1535 	.db #0x1f	; 31
+      0001B4 1E                    1536 	.db #0x1e	; 30
+      0001B5 24                    1537 	.db #0x24	; 36
+      0001B6 3C                    1538 	.db #0x3c	; 60
+      0001B7 21                    1539 	.db #0x21	; 33
+      0001B8 1E                    1540 	.db #0x1e	; 30
+      0001B9 1F                    1541 	.db #0x1f	; 31
+      0001BA 1E                    1542 	.db #0x1e	; 30
+      0001BB 24                    1543 	.db #0x24	; 36
+      0001BC 3C                    1544 	.db #0x3c	; 60
+      0001BD 21                    1545 	.db #0x21	; 33
+      0001BE 1E                    1546 	.db #0x1e	; 30
+      0001BF 1F                    1547 	.db #0x1f	; 31
+      0001C0 1E                    1548 	.db #0x1e	; 30
+      0001C1 24                    1549 	.db #0x24	; 36
+      0001C2 1E                    1550 	.db #0x1e	; 30
+      0001C3 1C                    1551 	.db #0x1c	; 28
+      0001C4 5A                    1552 	.db #0x5a	; 90	'Z'
+      0001C5 1A                    1553 	.db #0x1a	; 26
+      0001C6 3C                    1554 	.db #0x3c	; 60
+      0001C7 18                    1555 	.db #0x18	; 24
+      0001C8 1E                    1556 	.db #0x1e	; 30
+      0001C9 15                    1557 	.db #0x15	; 21
+      0001CA 1E                    1558 	.db #0x1e	; 30
+      0001CB 24                    1559 	.db #0x24	; 36
+      0001CC 3C                    1560 	.db #0x3c	; 60
+      0001CD 18                    1561 	.db #0x18	; 24
+      0001CE 1E                    1562 	.db #0x1e	; 30
+      0001CF 18                    1563 	.db #0x18	; 24
+      0001D0 1E                    1564 	.db #0x1e	; 30
+      0001D1 1A                    1565 	.db #0x1a	; 26
+      0001D2 1E                    1566 	.db #0x1e	; 30
+      0001D3 18                    1567 	.db #0x18	; 24
+      0001D4 1E                    1568 	.db #0x1e	; 30
+      0001D5 15                    1569 	.db #0x15	; 21
+      0001D6 3C                    1570 	.db #0x3c	; 60
+      0001D7 24                    1571 	.db #0x24	; 36
+      0001D8 1E                    1572 	.db #0x1e	; 30
+      0001D9 18                    1573 	.db #0x18	; 24
+      0001DA 5A                    1574 	.db #0x5a	; 90	'Z'
+      0001DB 1C                    1575 	.db #0x1c	; 28
+      0001DC 78                    1576 	.db #0x78	; 120	'x'
+      0001DD 24                    1577 	.db #0x24	; 36
+      0001DE 1E                    1578 	.db #0x1e	; 30
+      0001DF 1D                    1579 	.db #0x1d	; 29
+      0001E0 1E                    1580 	.db #0x1e	; 30
+      0001E1 1C                    1581 	.db #0x1c	; 28
+      0001E2 1E                    1582 	.db #0x1e	; 30
+      0001E3 1A                    1583 	.db #0x1a	; 26
+      0001E4 1E                    1584 	.db #0x1e	; 30
+      0001E5 1C                    1585 	.db #0x1c	; 28
+      0001E6 1E                    1586 	.db #0x1e	; 30
+      0001E7 1A                    1587 	.db #0x1a	; 26
+      0001E8 5A                    1588 	.db #0x5a	; 90	'Z'
+      0001E9 18                    1589 	.db #0x18	; 24
+      0001EA 3C                    1590 	.db #0x3c	; 60
+      0001EB 1A                    1591 	.db #0x1a	; 26
+      0001EC 3C                    1592 	.db #0x3c	; 60
+      0001ED 1C                    1593 	.db #0x1c	; 28
+      0001EE 3C                    1594 	.db #0x3c	; 60
+      0001EF 21                    1595 	.db #0x21	; 33
+      0001F0 1E                    1596 	.db #0x1e	; 30
+      0001F1 1F                    1597 	.db #0x1f	; 31
+      0001F2 1E                    1598 	.db #0x1e	; 30
+      0001F3 24                    1599 	.db #0x24	; 36
+      0001F4 3C                    1600 	.db #0x3c	; 60
+      0001F5 21                    1601 	.db #0x21	; 33
+      0001F6 1E                    1602 	.db #0x1e	; 30
+      0001F7 1F                    1603 	.db #0x1f	; 31
+      0001F8 1E                    1604 	.db #0x1e	; 30
+      0001F9 24                    1605 	.db #0x24	; 36
+      0001FA 3C                    1606 	.db #0x3c	; 60
+      0001FB 21                    1607 	.db #0x21	; 33
+      0001FC 1E                    1608 	.db #0x1e	; 30
+      0001FD 1F                    1609 	.db #0x1f	; 31
+      0001FE 1E                    1610 	.db #0x1e	; 30
+      0001FF 24                    1611 	.db #0x24	; 36
+      000200 3C                    1612 	.db #0x3c	; 60
+      000201 1A                    1613 	.db #0x1a	; 26
+      000202 3C                    1614 	.db #0x3c	; 60
+      000203 1C                    1615 	.db #0x1c	; 28
+      000204 3C                    1616 	.db #0x3c	; 60
+      000205 21                    1617 	.db #0x21	; 33
+      000206 1E                    1618 	.db #0x1e	; 30
+      000207 1F                    1619 	.db #0x1f	; 31
+      000208 1E                    1620 	.db #0x1e	; 30
+      000209 24                    1621 	.db #0x24	; 36
+      00020A 3C                    1622 	.db #0x3c	; 60
+      00020B 21                    1623 	.db #0x21	; 33
+      00020C 1E                    1624 	.db #0x1e	; 30
+      00020D 1F                    1625 	.db #0x1f	; 31
+      00020E 1E                    1626 	.db #0x1e	; 30
+      00020F 24                    1627 	.db #0x24	; 36
+      000210 3C                    1628 	.db #0x3c	; 60
+      000211 21                    1629 	.db #0x21	; 33
+      000212 1E                    1630 	.db #0x1e	; 30
+      000213 1F                    1631 	.db #0x1f	; 31
+      000214 1E                    1632 	.db #0x1e	; 30
+      000215 24                    1633 	.db #0x24	; 36
+      000216 1E                    1634 	.db #0x1e	; 30
+      000217 1C                    1635 	.db #0x1c	; 28
+      000218 5A                    1636 	.db #0x5a	; 90	'Z'
+      000219 1A                    1637 	.db #0x1a	; 26
+      00021A 3C                    1638 	.db #0x3c	; 60
+      00021B 18                    1639 	.db #0x18	; 24
+      00021C 1E                    1640 	.db #0x1e	; 30
+      00021D 21                    1641 	.db #0x21	; 33
+      00021E 1E                    1642 	.db #0x1e	; 30
+      00021F 24                    1643 	.db #0x24	; 36
+      000220 1E                    1644 	.db #0x1e	; 30
+      000221 1C                    1645 	.db #0x1c	; 28
+      000222 5A                    1646 	.db #0x5a	; 90	'Z'
+      000223 1A                    1647 	.db #0x1a	; 26
+      000224 3C                    1648 	.db #0x3c	; 60
+      000225 18                    1649 	.db #0x18	; 24
+      000226 1E                    1650 	.db #0x1e	; 30
+      000227 21                    1651 	.db #0x21	; 33
+      000228 1E                    1652 	.db #0x1e	; 30
+      000229 24                    1653 	.db #0x24	; 36
+      00022A 1E                    1654 	.db #0x1e	; 30
+      00022B 18                    1655 	.db #0x18	; 24
+      00022C 5A                    1656 	.db #0x5a	; 90	'Z'
+      00022D 18                    1657 	.db #0x18	; 24
+      00022E 78                    1658 	.db #0x78	; 120	'x'
+      00022F 24                    1659 	.db #0x24	; 36
+      000230 F0                    1660 	.db #0xf0	; 240
+      000231 21                    1661 	.db #0x21	; 33
+      000232 1E                    1662 	.db #0x1e	; 30
+      000233 1C                    1663 	.db #0x1c	; 28
+      000234 5A                    1664 	.db #0x5a	; 90	'Z'
+      000235 1A                    1665 	.db #0x1a	; 26
+      000236 3C                    1666 	.db #0x3c	; 60
+      000237 18                    1667 	.db #0x18	; 24
+      000238 1E                    1668 	.db #0x1e	; 30
+      000239 21                    1669 	.db #0x21	; 33
+      00023A 1E                    1670 	.db #0x1e	; 30
+      00023B 24                    1671 	.db #0x24	; 36
+      00023C 1E                    1672 	.db #0x1e	; 30
+      00023D 1C                    1673 	.db #0x1c	; 28
+      00023E 5A                    1674 	.db #0x5a	; 90	'Z'
+      00023F 1A                    1675 	.db #0x1a	; 26
+      000240 3C                    1676 	.db #0x3c	; 60
+      000241 18                    1677 	.db #0x18	; 24
+      000242 1E                    1678 	.db #0x1e	; 30
+      000243 21                    1679 	.db #0x21	; 33
+      000244 1E                    1680 	.db #0x1e	; 30
+      000245 24                    1681 	.db #0x24	; 36
+      000246 1E                    1682 	.db #0x1e	; 30
+      000247 18                    1683 	.db #0x18	; 24
+      000248 5A                    1684 	.db #0x5a	; 90	'Z'
+      000249 18                    1685 	.db #0x18	; 24
+      00024A F0                    1686 	.db #0xf0	; 240
+      00024B 24                    1687 	.db #0x24	; 36
+      00024C F0                    1688 	.db #0xf0	; 240
+      00024D 24                    1689 	.db #0x24	; 36
+      00024E FA                    1690 	.db #0xfa	; 250
+      00024F FF                    1691 	.db #0xff	; 255
+      000250                       1692 _ryssdnr:
+      000250 07                    1693 	.db #0x07	; 7
+      000251 50                    1694 	.db #0x50	; 80	'P'
+      000252 09                    1695 	.db #0x09	; 9
+      000253 50                    1696 	.db #0x50	; 80	'P'
+      000254 0C                    1697 	.db #0x0c	; 12
+      000255 50                    1698 	.db #0x50	; 80	'P'
+      000256 0C                    1699 	.db #0x0c	; 12
+      000257 50                    1700 	.db #0x50	; 80	'P'
+      000258 0C                    1701 	.db #0x0c	; 12
+      000259 50                    1702 	.db #0x50	; 80	'P'
+      00025A 0E                    1703 	.db #0x0e	; 14
+      00025B 28                    1704 	.db #0x28	; 40
+      00025C 10                    1705 	.db #0x10	; 16
+      00025D C8                    1706 	.db #0xc8	; 200
+      00025E 24                    1707 	.db #0x24	; 36
+      00025F 50                    1708 	.db #0x50	; 80	'P'
+      000260 10                    1709 	.db #0x10	; 16
+      000261 28                    1710 	.db #0x28	; 40
+      000262 13                    1711 	.db #0x13	; 19
+      000263 28                    1712 	.db #0x28	; 40
+      000264 15                    1713 	.db #0x15	; 21
+      000265 50                    1714 	.db #0x50	; 80	'P'
+      000266 15                    1715 	.db #0x15	; 21
+      000267 50                    1716 	.db #0x50	; 80	'P'
+      000268 17                    1717 	.db #0x17	; 23
+      000269 32                    1718 	.db #0x32	; 50	'2'
+      00026A 15                    1719 	.db #0x15	; 21
+      00026B 32                    1720 	.db #0x32	; 50	'2'
+      00026C 13                    1721 	.db #0x13	; 19
+      00026D 32                    1722 	.db #0x32	; 50	'2'
+      00026E 10                    1723 	.db #0x10	; 16
+      00026F A0                    1724 	.db #0xa0	; 160
+      000270 24                    1725 	.db #0x24	; 36
+      000271 50                    1726 	.db #0x50	; 80	'P'
+      000272 10                    1727 	.db #0x10	; 16
+      000273 50                    1728 	.db #0x50	; 80	'P'
+      000274 0E                    1729 	.db #0x0e	; 14
+      000275 A0                    1730 	.db #0xa0	; 160
+      000276 0E                    1731 	.db #0x0e	; 14
+      000277 28                    1732 	.db #0x28	; 40
+      000278 0C                    1733 	.db #0x0c	; 12
+      000279 28                    1734 	.db #0x28	; 40
+      00027A 09                    1735 	.db #0x09	; 9
+      00027B 50                    1736 	.db #0x50	; 80	'P'
+      00027C 07                    1737 	.db #0x07	; 7
+      00027D 50                    1738 	.db #0x50	; 80	'P'
+      00027E 09                    1739 	.db #0x09	; 9
+      00027F 50                    1740 	.db #0x50	; 80	'P'
+      000280 24                    1741 	.db #0x24	; 36
+      000281 50                    1742 	.db #0x50	; 80	'P'
+      000282 07                    1743 	.db #0x07	; 7
+      000283 50                    1744 	.db #0x50	; 80	'P'
+      000284 0C                    1745 	.db #0x0c	; 12
+      000285 A0                    1746 	.db #0xa0	; 160
+      000286 0C                    1747 	.db #0x0c	; 12
+      000287 50                    1748 	.db #0x50	; 80	'P'
+      000288 0C                    1749 	.db #0x0c	; 12
+      000289 50                    1750 	.db #0x50	; 80	'P'
+      00028A 0E                    1751 	.db #0x0e	; 14
+      00028B A0                    1752 	.db #0xa0	; 160
+      00028C 24                    1753 	.db #0x24	; 36
+      00028D 50                    1754 	.db #0x50	; 80	'P'
+      00028E 07                    1755 	.db #0x07	; 7
+      00028F 28                    1756 	.db #0x28	; 40
+      000290 09                    1757 	.db #0x09	; 9
+      000291 28                    1758 	.db #0x28	; 40
+      000292 0C                    1759 	.db #0x0c	; 12
+      000293 50                    1760 	.db #0x50	; 80	'P'
+      000294 0C                    1761 	.db #0x0c	; 12
+      000295 50                    1762 	.db #0x50	; 80	'P'
+      000296 0C                    1763 	.db #0x0c	; 12
+      000297 50                    1764 	.db #0x50	; 80	'P'
+      000298 0E                    1765 	.db #0x0e	; 14
+      000299 28                    1766 	.db #0x28	; 40
+      00029A 10                    1767 	.db #0x10	; 16
+      00029B C8                    1768 	.db #0xc8	; 200
+      00029C 24                    1769 	.db #0x24	; 36
+      00029D 50                    1770 	.db #0x50	; 80	'P'
+      00029E 10                    1771 	.db #0x10	; 16
+      00029F 28                    1772 	.db #0x28	; 40
+      0002A0 13                    1773 	.db #0x13	; 19
+      0002A1 28                    1774 	.db #0x28	; 40
+      0002A2 15                    1775 	.db #0x15	; 21
+      0002A3 50                    1776 	.db #0x50	; 80	'P'
+      0002A4 15                    1777 	.db #0x15	; 21
+      0002A5 50                    1778 	.db #0x50	; 80	'P'
+      0002A6 17                    1779 	.db #0x17	; 23
+      0002A7 32                    1780 	.db #0x32	; 50	'2'
+      0002A8 15                    1781 	.db #0x15	; 21
+      0002A9 32                    1782 	.db #0x32	; 50	'2'
+      0002AA 13                    1783 	.db #0x13	; 19
+      0002AB 32                    1784 	.db #0x32	; 50	'2'
+      0002AC 10                    1785 	.db #0x10	; 16
+      0002AD A0                    1786 	.db #0xa0	; 160
+      0002AE 24                    1787 	.db #0x24	; 36
+      0002AF 50                    1788 	.db #0x50	; 80	'P'
+      0002B0 10                    1789 	.db #0x10	; 16
+      0002B1 50                    1790 	.db #0x50	; 80	'P'
+      0002B2 0E                    1791 	.db #0x0e	; 14
+      0002B3 A0                    1792 	.db #0xa0	; 160
+      0002B4 0E                    1793 	.db #0x0e	; 14
+      0002B5 28                    1794 	.db #0x28	; 40
+      0002B6 0C                    1795 	.db #0x0c	; 12
+      0002B7 28                    1796 	.db #0x28	; 40
+      0002B8 09                    1797 	.db #0x09	; 9
+      0002B9 28                    1798 	.db #0x28	; 40
+      0002BA 07                    1799 	.db #0x07	; 7
+      0002BB 28                    1800 	.db #0x28	; 40
+      0002BC 09                    1801 	.db #0x09	; 9
+      0002BD F0                    1802 	.db #0xf0	; 240
+      0002BE 0C                    1803 	.db #0x0c	; 12
+      0002BF 50                    1804 	.db #0x50	; 80	'P'
+      0002C0 0B                    1805 	.db #0x0b	; 11
+      0002C1 A0                    1806 	.db #0xa0	; 160
+      0002C2 09                    1807 	.db #0x09	; 9
+      0002C3 50                    1808 	.db #0x50	; 80	'P'
+      0002C4 07                    1809 	.db #0x07	; 7
+      0002C5 50                    1810 	.db #0x50	; 80	'P'
+      0002C6 09                    1811 	.db #0x09	; 9
+      0002C7 A0                    1812 	.db #0xa0	; 160
+      0002C8 0C                    1813 	.db #0x0c	; 12
+      0002C9 50                    1814 	.db #0x50	; 80	'P'
+      0002CA 0E                    1815 	.db #0x0e	; 14
+      0002CB 50                    1816 	.db #0x50	; 80	'P'
+      0002CC 10                    1817 	.db #0x10	; 16
+      0002CD 50                    1818 	.db #0x50	; 80	'P'
+      0002CE 13                    1819 	.db #0x13	; 19
+      0002CF 50                    1820 	.db #0x50	; 80	'P'
+      0002D0 10                    1821 	.db #0x10	; 16
+      0002D1 28                    1822 	.db #0x28	; 40
+      0002D2 0E                    1823 	.db #0x0e	; 14
+      0002D3 28                    1824 	.db #0x28	; 40
+      0002D4 0C                    1825 	.db #0x0c	; 12
+      0002D5 28                    1826 	.db #0x28	; 40
+      0002D6 0E                    1827 	.db #0x0e	; 14
+      0002D7 28                    1828 	.db #0x28	; 40
+      0002D8 10                    1829 	.db #0x10	; 16
+      0002D9 50                    1830 	.db #0x50	; 80	'P'
+      0002DA 15                    1831 	.db #0x15	; 21
+      0002DB 50                    1832 	.db #0x50	; 80	'P'
+      0002DC 10                    1833 	.db #0x10	; 16
+      0002DD 28                    1834 	.db #0x28	; 40
+      0002DE 0E                    1835 	.db #0x0e	; 14
+      0002DF 28                    1836 	.db #0x28	; 40
+      0002E0 0C                    1837 	.db #0x0c	; 12
+      0002E1 28                    1838 	.db #0x28	; 40
+      0002E2 0E                    1839 	.db #0x0e	; 14
+      0002E3 28                    1840 	.db #0x28	; 40
+      0002E4 10                    1841 	.db #0x10	; 16
+      0002E5 50                    1842 	.db #0x50	; 80	'P'
+      0002E6 17                    1843 	.db #0x17	; 23
+      0002E7 50                    1844 	.db #0x50	; 80	'P'
+      0002E8 17                    1845 	.db #0x17	; 23
+      0002E9 50                    1846 	.db #0x50	; 80	'P'
+      0002EA 10                    1847 	.db #0x10	; 16
+      0002EB 28                    1848 	.db #0x28	; 40
+      0002EC 13                    1849 	.db #0x13	; 19
+      0002ED 28                    1850 	.db #0x28	; 40
+      0002EE 15                    1851 	.db #0x15	; 21
+      0002EF A0                    1852 	.db #0xa0	; 160
+      0002F0 15                    1853 	.db #0x15	; 21
+      0002F1 50                    1854 	.db #0x50	; 80	'P'
+      0002F2 13                    1855 	.db #0x13	; 19
+      0002F3 50                    1856 	.db #0x50	; 80	'P'
+      0002F4 15                    1857 	.db #0x15	; 21
+      0002F5 50                    1858 	.db #0x50	; 80	'P'
+      0002F6 13                    1859 	.db #0x13	; 19
+      0002F7 50                    1860 	.db #0x50	; 80	'P'
+      0002F8 15                    1861 	.db #0x15	; 21
+      0002F9 28                    1862 	.db #0x28	; 40
+      0002FA 13                    1863 	.db #0x13	; 19
+      0002FB 28                    1864 	.db #0x28	; 40
+      0002FC 10                    1865 	.db #0x10	; 16
+      0002FD 28                    1866 	.db #0x28	; 40
+      0002FE 0E                    1867 	.db #0x0e	; 14
+      0002FF 28                    1868 	.db #0x28	; 40
+      000300 10                    1869 	.db #0x10	; 16
+      000301 50                    1870 	.db #0x50	; 80	'P'
+      000302 13                    1871 	.db #0x13	; 19
+      000303 50                    1872 	.db #0x50	; 80	'P'
+      000304 10                    1873 	.db #0x10	; 16
+      000305 50                    1874 	.db #0x50	; 80	'P'
+      000306 10                    1875 	.db #0x10	; 16
+      000307 50                    1876 	.db #0x50	; 80	'P'
+      000308 0E                    1877 	.db #0x0e	; 14
+      000309 A0                    1878 	.db #0xa0	; 160
+      00030A 0C                    1879 	.db #0x0c	; 12
+      00030B 50                    1880 	.db #0x50	; 80	'P'
+      00030C 0E                    1881 	.db #0x0e	; 14
+      00030D 50                    1882 	.db #0x50	; 80	'P'
+      00030E 10                    1883 	.db #0x10	; 16
+      00030F A0                    1884 	.db #0xa0	; 160
+      000310 0C                    1885 	.db #0x0c	; 12
+      000311 50                    1886 	.db #0x50	; 80	'P'
+      000312 0E                    1887 	.db #0x0e	; 14
+      000313 50                    1888 	.db #0x50	; 80	'P'
+      000314 10                    1889 	.db #0x10	; 16
+      000315 50                    1890 	.db #0x50	; 80	'P'
+      000316 13                    1891 	.db #0x13	; 19
+      000317 50                    1892 	.db #0x50	; 80	'P'
+      000318 10                    1893 	.db #0x10	; 16
+      000319 28                    1894 	.db #0x28	; 40
+      00031A 0E                    1895 	.db #0x0e	; 14
+      00031B 28                    1896 	.db #0x28	; 40
+      00031C 0C                    1897 	.db #0x0c	; 12
+      00031D 28                    1898 	.db #0x28	; 40
+      00031E 0E                    1899 	.db #0x0e	; 14
+      00031F 28                    1900 	.db #0x28	; 40
+      000320 10                    1901 	.db #0x10	; 16
+      000321 50                    1902 	.db #0x50	; 80	'P'
+      000322 15                    1903 	.db #0x15	; 21
+      000323 50                    1904 	.db #0x50	; 80	'P'
+      000324 10                    1905 	.db #0x10	; 16
+      000325 28                    1906 	.db #0x28	; 40
+      000326 0E                    1907 	.db #0x0e	; 14
+      000327 28                    1908 	.db #0x28	; 40
+      000328 0C                    1909 	.db #0x0c	; 12
+      000329 28                    1910 	.db #0x28	; 40
+      00032A 0E                    1911 	.db #0x0e	; 14
+      00032B 28                    1912 	.db #0x28	; 40
+      00032C 10                    1913 	.db #0x10	; 16
+      00032D 50                    1914 	.db #0x50	; 80	'P'
+      00032E 17                    1915 	.db #0x17	; 23
+      00032F 50                    1916 	.db #0x50	; 80	'P'
+      000330 17                    1917 	.db #0x17	; 23
+      000331 50                    1918 	.db #0x50	; 80	'P'
+      000332 10                    1919 	.db #0x10	; 16
+      000333 28                    1920 	.db #0x28	; 40
+      000334 13                    1921 	.db #0x13	; 19
+      000335 28                    1922 	.db #0x28	; 40
+      000336 15                    1923 	.db #0x15	; 21
+      000337 A0                    1924 	.db #0xa0	; 160
+      000338 15                    1925 	.db #0x15	; 21
+      000339 50                    1926 	.db #0x50	; 80	'P'
+      00033A 13                    1927 	.db #0x13	; 19
+      00033B 28                    1928 	.db #0x28	; 40
+      00033C 15                    1929 	.db #0x15	; 21
+      00033D 28                    1930 	.db #0x28	; 40
+      00033E 24                    1931 	.db #0x24	; 36
+      00033F F0                    1932 	.db #0xf0	; 240
+      000340 13                    1933 	.db #0x13	; 19
+      000341 50                    1934 	.db #0x50	; 80	'P'
+      000342 15                    1935 	.db #0x15	; 21
+      000343 50                    1936 	.db #0x50	; 80	'P'
+      000344 18                    1937 	.db #0x18	; 24
+      000345 A0                    1938 	.db #0xa0	; 160
+      000346 15                    1939 	.db #0x15	; 21
+      000347 50                    1940 	.db #0x50	; 80	'P'
+      000348 10                    1941 	.db #0x10	; 16
+      000349 50                    1942 	.db #0x50	; 80	'P'
+      00034A 13                    1943 	.db #0x13	; 19
+      00034B F0                    1944 	.db #0xf0	; 240
+      00034C 24                    1945 	.db #0x24	; 36
+      00034D F0                    1946 	.db #0xf0	; 240
+      00034E 07                    1947 	.db #0x07	; 7
+      00034F 28                    1948 	.db #0x28	; 40
+      000350 09                    1949 	.db #0x09	; 9
+      000351 28                    1950 	.db #0x28	; 40
+      000352 0C                    1951 	.db #0x0c	; 12
+      000353 50                    1952 	.db #0x50	; 80	'P'
+      000354 0C                    1953 	.db #0x0c	; 12
+      000355 50                    1954 	.db #0x50	; 80	'P'
+      000356 0C                    1955 	.db #0x0c	; 12
+      000357 50                    1956 	.db #0x50	; 80	'P'
+      000358 0E                    1957 	.db #0x0e	; 14
+      000359 28                    1958 	.db #0x28	; 40
+      00035A 10                    1959 	.db #0x10	; 16
+      00035B C8                    1960 	.db #0xc8	; 200
+      00035C 24                    1961 	.db #0x24	; 36
+      00035D 50                    1962 	.db #0x50	; 80	'P'
+      00035E 10                    1963 	.db #0x10	; 16
+      00035F 28                    1964 	.db #0x28	; 40
+      000360 13                    1965 	.db #0x13	; 19
+      000361 28                    1966 	.db #0x28	; 40
+      000362 15                    1967 	.db #0x15	; 21
+      000363 50                    1968 	.db #0x50	; 80	'P'
+      000364 15                    1969 	.db #0x15	; 21
+      000365 50                    1970 	.db #0x50	; 80	'P'
+      000366 17                    1971 	.db #0x17	; 23
+      000367 32                    1972 	.db #0x32	; 50	'2'
+      000368 15                    1973 	.db #0x15	; 21
+      000369 32                    1974 	.db #0x32	; 50	'2'
+      00036A 13                    1975 	.db #0x13	; 19
+      00036B 32                    1976 	.db #0x32	; 50	'2'
+      00036C 10                    1977 	.db #0x10	; 16
+      00036D A0                    1978 	.db #0xa0	; 160
+      00036E 24                    1979 	.db #0x24	; 36
+      00036F 50                    1980 	.db #0x50	; 80	'P'
+      000370 10                    1981 	.db #0x10	; 16
+      000371 50                    1982 	.db #0x50	; 80	'P'
+      000372 0E                    1983 	.db #0x0e	; 14
+      000373 A0                    1984 	.db #0xa0	; 160
+      000374 0E                    1985 	.db #0x0e	; 14
+      000375 28                    1986 	.db #0x28	; 40
+      000376 0C                    1987 	.db #0x0c	; 12
+      000377 28                    1988 	.db #0x28	; 40
+      000378 09                    1989 	.db #0x09	; 9
+      000379 28                    1990 	.db #0x28	; 40
+      00037A 07                    1991 	.db #0x07	; 7
+      00037B 28                    1992 	.db #0x28	; 40
+      00037C 09                    1993 	.db #0x09	; 9
+      00037D F0                    1994 	.db #0xf0	; 240
+      00037E 0C                    1995 	.db #0x0c	; 12
+      00037F 50                    1996 	.db #0x50	; 80	'P'
+      000380 0B                    1997 	.db #0x0b	; 11
+      000381 A0                    1998 	.db #0xa0	; 160
+      000382 09                    1999 	.db #0x09	; 9
+      000383 50                    2000 	.db #0x50	; 80	'P'
+      000384 07                    2001 	.db #0x07	; 7
+      000385 28                    2002 	.db #0x28	; 40
+      000386 09                    2003 	.db #0x09	; 9
+      000387 C8                    2004 	.db #0xc8	; 200
+      000388 24                    2005 	.db #0x24	; 36
+      000389 A0                    2006 	.db #0xa0	; 160
+      00038A 07                    2007 	.db #0x07	; 7
+      00038B 50                    2008 	.db #0x50	; 80	'P'
+      00038C 09                    2009 	.db #0x09	; 9
+      00038D 50                    2010 	.db #0x50	; 80	'P'
+      00038E 0C                    2011 	.db #0x0c	; 12
+      00038F 50                    2012 	.db #0x50	; 80	'P'
+      000390 0C                    2013 	.db #0x0c	; 12
+      000391 50                    2014 	.db #0x50	; 80	'P'
+      000392 0C                    2015 	.db #0x0c	; 12
+      000393 50                    2016 	.db #0x50	; 80	'P'
+      000394 0E                    2017 	.db #0x0e	; 14
+      000395 28                    2018 	.db #0x28	; 40
+      000396 10                    2019 	.db #0x10	; 16
+      000397 C8                    2020 	.db #0xc8	; 200
+      000398 24                    2021 	.db #0x24	; 36
+      000399 50                    2022 	.db #0x50	; 80	'P'
+      00039A 10                    2023 	.db #0x10	; 16
+      00039B 28                    2024 	.db #0x28	; 40
+      00039C 13                    2025 	.db #0x13	; 19
+      00039D 28                    2026 	.db #0x28	; 40
+      00039E 15                    2027 	.db #0x15	; 21
+      00039F 50                    2028 	.db #0x50	; 80	'P'
+      0003A0 15                    2029 	.db #0x15	; 21
+      0003A1 50                    2030 	.db #0x50	; 80	'P'
+      0003A2 17                    2031 	.db #0x17	; 23
+      0003A3 32                    2032 	.db #0x32	; 50	'2'
+      0003A4 15                    2033 	.db #0x15	; 21
+      0003A5 32                    2034 	.db #0x32	; 50	'2'
+      0003A6 13                    2035 	.db #0x13	; 19
+      0003A7 32                    2036 	.db #0x32	; 50	'2'
+      0003A8 10                    2037 	.db #0x10	; 16
+      0003A9 A0                    2038 	.db #0xa0	; 160
+      0003AA 24                    2039 	.db #0x24	; 36
+      0003AB 50                    2040 	.db #0x50	; 80	'P'
+      0003AC 0E                    2041 	.db #0x0e	; 14
+      0003AD 28                    2042 	.db #0x28	; 40
+      0003AE 10                    2043 	.db #0x10	; 16
+      0003AF 28                    2044 	.db #0x28	; 40
+      0003B0 0E                    2045 	.db #0x0e	; 14
+      0003B1 A0                    2046 	.db #0xa0	; 160
+      0003B2 0E                    2047 	.db #0x0e	; 14
+      0003B3 28                    2048 	.db #0x28	; 40
+      0003B4 0C                    2049 	.db #0x0c	; 12
+      0003B5 28                    2050 	.db #0x28	; 40
+      0003B6 09                    2051 	.db #0x09	; 9
+      0003B7 50                    2052 	.db #0x50	; 80	'P'
+      0003B8 07                    2053 	.db #0x07	; 7
+      0003B9 50                    2054 	.db #0x50	; 80	'P'
+      0003BA 09                    2055 	.db #0x09	; 9
+      0003BB 50                    2056 	.db #0x50	; 80	'P'
+      0003BC 24                    2057 	.db #0x24	; 36
+      0003BD 50                    2058 	.db #0x50	; 80	'P'
+      0003BE 07                    2059 	.db #0x07	; 7
+      0003BF 50                    2060 	.db #0x50	; 80	'P'
+      0003C0 0C                    2061 	.db #0x0c	; 12
+      0003C1 A0                    2062 	.db #0xa0	; 160
+      0003C2 0C                    2063 	.db #0x0c	; 12
+      0003C3 50                    2064 	.db #0x50	; 80	'P'
+      0003C4 0C                    2065 	.db #0x0c	; 12
+      0003C5 50                    2066 	.db #0x50	; 80	'P'
+      0003C6 0E                    2067 	.db #0x0e	; 14
+      0003C7 A0                    2068 	.db #0xa0	; 160
+      0003C8 24                    2069 	.db #0x24	; 36
+      0003C9 50                    2070 	.db #0x50	; 80	'P'
+      0003CA 07                    2071 	.db #0x07	; 7
+      0003CB 28                    2072 	.db #0x28	; 40
+      0003CC 09                    2073 	.db #0x09	; 9
+      0003CD 28                    2074 	.db #0x28	; 40
+      0003CE 0C                    2075 	.db #0x0c	; 12
+      0003CF 50                    2076 	.db #0x50	; 80	'P'
+      0003D0 0C                    2077 	.db #0x0c	; 12
+      0003D1 50                    2078 	.db #0x50	; 80	'P'
+      0003D2 0C                    2079 	.db #0x0c	; 12
+      0003D3 50                    2080 	.db #0x50	; 80	'P'
+      0003D4 0E                    2081 	.db #0x0e	; 14
+      0003D5 28                    2082 	.db #0x28	; 40
+      0003D6 10                    2083 	.db #0x10	; 16
+      0003D7 C8                    2084 	.db #0xc8	; 200
+      0003D8 24                    2085 	.db #0x24	; 36
+      0003D9 50                    2086 	.db #0x50	; 80	'P'
+      0003DA 10                    2087 	.db #0x10	; 16
+      0003DB 28                    2088 	.db #0x28	; 40
+      0003DC 13                    2089 	.db #0x13	; 19
+      0003DD 28                    2090 	.db #0x28	; 40
+      0003DE 15                    2091 	.db #0x15	; 21
+      0003DF 50                    2092 	.db #0x50	; 80	'P'
+      0003E0 15                    2093 	.db #0x15	; 21
+      0003E1 50                    2094 	.db #0x50	; 80	'P'
+      0003E2 17                    2095 	.db #0x17	; 23
+      0003E3 32                    2096 	.db #0x32	; 50	'2'
+      0003E4 15                    2097 	.db #0x15	; 21
+      0003E5 32                    2098 	.db #0x32	; 50	'2'
+      0003E6 13                    2099 	.db #0x13	; 19
+      0003E7 32                    2100 	.db #0x32	; 50	'2'
+      0003E8 10                    2101 	.db #0x10	; 16
+      0003E9 A0                    2102 	.db #0xa0	; 160
+      0003EA 24                    2103 	.db #0x24	; 36
+      0003EB 50                    2104 	.db #0x50	; 80	'P'
+      0003EC 10                    2105 	.db #0x10	; 16
+      0003ED 50                    2106 	.db #0x50	; 80	'P'
+      0003EE 0E                    2107 	.db #0x0e	; 14
+      0003EF A0                    2108 	.db #0xa0	; 160
+      0003F0 0E                    2109 	.db #0x0e	; 14
+      0003F1 28                    2110 	.db #0x28	; 40
+      0003F2 0C                    2111 	.db #0x0c	; 12
+      0003F3 28                    2112 	.db #0x28	; 40
+      0003F4 09                    2113 	.db #0x09	; 9
+      0003F5 28                    2114 	.db #0x28	; 40
+      0003F6 07                    2115 	.db #0x07	; 7
+      0003F7 28                    2116 	.db #0x28	; 40
+      0003F8 09                    2117 	.db #0x09	; 9
+      0003F9 F0                    2118 	.db #0xf0	; 240
+      0003FA 0C                    2119 	.db #0x0c	; 12
+      0003FB 50                    2120 	.db #0x50	; 80	'P'
+      0003FC 0B                    2121 	.db #0x0b	; 11
+      0003FD A0                    2122 	.db #0xa0	; 160
+      0003FE 09                    2123 	.db #0x09	; 9
+      0003FF 50                    2124 	.db #0x50	; 80	'P'
+      000400 07                    2125 	.db #0x07	; 7
+      000401 50                    2126 	.db #0x50	; 80	'P'
+      000402 09                    2127 	.db #0x09	; 9
+      000403 A0                    2128 	.db #0xa0	; 160
+      000404 0C                    2129 	.db #0x0c	; 12
+      000405 50                    2130 	.db #0x50	; 80	'P'
+      000406 0E                    2131 	.db #0x0e	; 14
+      000407 50                    2132 	.db #0x50	; 80	'P'
+      000408 10                    2133 	.db #0x10	; 16
+      000409 50                    2134 	.db #0x50	; 80	'P'
+      00040A 13                    2135 	.db #0x13	; 19
+      00040B 50                    2136 	.db #0x50	; 80	'P'
+      00040C 10                    2137 	.db #0x10	; 16
+      00040D 28                    2138 	.db #0x28	; 40
+      00040E 0E                    2139 	.db #0x0e	; 14
+      00040F 28                    2140 	.db #0x28	; 40
+      000410 0C                    2141 	.db #0x0c	; 12
+      000411 28                    2142 	.db #0x28	; 40
+      000412 0E                    2143 	.db #0x0e	; 14
+      000413 28                    2144 	.db #0x28	; 40
+      000414 10                    2145 	.db #0x10	; 16
+      000415 50                    2146 	.db #0x50	; 80	'P'
+      000416 15                    2147 	.db #0x15	; 21
+      000417 50                    2148 	.db #0x50	; 80	'P'
+      000418 10                    2149 	.db #0x10	; 16
+      000419 28                    2150 	.db #0x28	; 40
+      00041A 0E                    2151 	.db #0x0e	; 14
+      00041B 28                    2152 	.db #0x28	; 40
+      00041C 0C                    2153 	.db #0x0c	; 12
+      00041D 28                    2154 	.db #0x28	; 40
+      00041E 0E                    2155 	.db #0x0e	; 14
+      00041F 28                    2156 	.db #0x28	; 40
+      000420 10                    2157 	.db #0x10	; 16
+      000421 50                    2158 	.db #0x50	; 80	'P'
+      000422 17                    2159 	.db #0x17	; 23
+      000423 50                    2160 	.db #0x50	; 80	'P'
+      000424 17                    2161 	.db #0x17	; 23
+      000425 50                    2162 	.db #0x50	; 80	'P'
+      000426 10                    2163 	.db #0x10	; 16
+      000427 28                    2164 	.db #0x28	; 40
+      000428 13                    2165 	.db #0x13	; 19
+      000429 28                    2166 	.db #0x28	; 40
+      00042A 15                    2167 	.db #0x15	; 21
+      00042B A0                    2168 	.db #0xa0	; 160
+      00042C 15                    2169 	.db #0x15	; 21
+      00042D 50                    2170 	.db #0x50	; 80	'P'
+      00042E 13                    2171 	.db #0x13	; 19
+      00042F 50                    2172 	.db #0x50	; 80	'P'
+      000430 15                    2173 	.db #0x15	; 21
+      000431 50                    2174 	.db #0x50	; 80	'P'
+      000432 13                    2175 	.db #0x13	; 19
+      000433 50                    2176 	.db #0x50	; 80	'P'
+      000434 15                    2177 	.db #0x15	; 21
+      000435 28                    2178 	.db #0x28	; 40
+      000436 13                    2179 	.db #0x13	; 19
+      000437 28                    2180 	.db #0x28	; 40
+      000438 10                    2181 	.db #0x10	; 16
+      000439 28                    2182 	.db #0x28	; 40
+      00043A 0E                    2183 	.db #0x0e	; 14
+      00043B 28                    2184 	.db #0x28	; 40
+      00043C 10                    2185 	.db #0x10	; 16
+      00043D 50                    2186 	.db #0x50	; 80	'P'
+      00043E 13                    2187 	.db #0x13	; 19
+      00043F 50                    2188 	.db #0x50	; 80	'P'
+      000440 10                    2189 	.db #0x10	; 16
+      000441 50                    2190 	.db #0x50	; 80	'P'
+      000442 10                    2191 	.db #0x10	; 16
+      000443 50                    2192 	.db #0x50	; 80	'P'
+      000444 0E                    2193 	.db #0x0e	; 14
+      000445 A0                    2194 	.db #0xa0	; 160
+      000446 0C                    2195 	.db #0x0c	; 12
+      000447 50                    2196 	.db #0x50	; 80	'P'
+      000448 0E                    2197 	.db #0x0e	; 14
+      000449 50                    2198 	.db #0x50	; 80	'P'
+      00044A 10                    2199 	.db #0x10	; 16
+      00044B A0                    2200 	.db #0xa0	; 160
+      00044C 0C                    2201 	.db #0x0c	; 12
+      00044D 50                    2202 	.db #0x50	; 80	'P'
+      00044E 0E                    2203 	.db #0x0e	; 14
+      00044F 50                    2204 	.db #0x50	; 80	'P'
+      000450 10                    2205 	.db #0x10	; 16
+      000451 50                    2206 	.db #0x50	; 80	'P'
+      000452 13                    2207 	.db #0x13	; 19
+      000453 50                    2208 	.db #0x50	; 80	'P'
+      000454 10                    2209 	.db #0x10	; 16
+      000455 28                    2210 	.db #0x28	; 40
+      000456 0E                    2211 	.db #0x0e	; 14
+      000457 28                    2212 	.db #0x28	; 40
+      000458 0C                    2213 	.db #0x0c	; 12
+      000459 28                    2214 	.db #0x28	; 40
+      00045A 0E                    2215 	.db #0x0e	; 14
+      00045B 28                    2216 	.db #0x28	; 40
+      00045C 10                    2217 	.db #0x10	; 16
+      00045D 50                    2218 	.db #0x50	; 80	'P'
+      00045E 15                    2219 	.db #0x15	; 21
+      00045F 50                    2220 	.db #0x50	; 80	'P'
+      000460 10                    2221 	.db #0x10	; 16
+      000461 28                    2222 	.db #0x28	; 40
+      000462 0E                    2223 	.db #0x0e	; 14
+      000463 28                    2224 	.db #0x28	; 40
+      000464 0C                    2225 	.db #0x0c	; 12
+      000465 28                    2226 	.db #0x28	; 40
+      000466 0E                    2227 	.db #0x0e	; 14
+      000467 28                    2228 	.db #0x28	; 40
+      000468 10                    2229 	.db #0x10	; 16
+      000469 50                    2230 	.db #0x50	; 80	'P'
+      00046A 17                    2231 	.db #0x17	; 23
+      00046B 50                    2232 	.db #0x50	; 80	'P'
+      00046C 17                    2233 	.db #0x17	; 23
+      00046D 50                    2234 	.db #0x50	; 80	'P'
+      00046E 10                    2235 	.db #0x10	; 16
+      00046F 28                    2236 	.db #0x28	; 40
+      000470 13                    2237 	.db #0x13	; 19
+      000471 28                    2238 	.db #0x28	; 40
+      000472 15                    2239 	.db #0x15	; 21
+      000473 A0                    2240 	.db #0xa0	; 160
+      000474 15                    2241 	.db #0x15	; 21
+      000475 50                    2242 	.db #0x50	; 80	'P'
+      000476 13                    2243 	.db #0x13	; 19
+      000477 50                    2244 	.db #0x50	; 80	'P'
+      000478 15                    2245 	.db #0x15	; 21
+      000479 50                    2246 	.db #0x50	; 80	'P'
+      00047A 15                    2247 	.db #0x15	; 21
+      00047B A0                    2248 	.db #0xa0	; 160
+      00047C 18                    2249 	.db #0x18	; 24
+      00047D 50                    2250 	.db #0x50	; 80	'P'
+      00047E 18                    2251 	.db #0x18	; 24
+      00047F 50                    2252 	.db #0x50	; 80	'P'
+      000480 18                    2253 	.db #0x18	; 24
+      000481 50                    2254 	.db #0x50	; 80	'P'
+      000482 15                    2255 	.db #0x15	; 21
+      000483 50                    2256 	.db #0x50	; 80	'P'
+      000484 10                    2257 	.db #0x10	; 16
+      000485 50                    2258 	.db #0x50	; 80	'P'
+      000486 13                    2259 	.db #0x13	; 19
+      000487 A0                    2260 	.db #0xa0	; 160
+      000488 24                    2261 	.db #0x24	; 36
+      000489 A0                    2262 	.db #0xa0	; 160
+      00048A 24                    2263 	.db #0x24	; 36
+      00048B F0                    2264 	.db #0xf0	; 240
+      00048C 07                    2265 	.db #0x07	; 7
+      00048D 28                    2266 	.db #0x28	; 40
+      00048E 09                    2267 	.db #0x09	; 9
+      00048F 28                    2268 	.db #0x28	; 40
+      000490 0C                    2269 	.db #0x0c	; 12
+      000491 50                    2270 	.db #0x50	; 80	'P'
+      000492 0C                    2271 	.db #0x0c	; 12
+      000493 50                    2272 	.db #0x50	; 80	'P'
+      000494 0C                    2273 	.db #0x0c	; 12
+      000495 50                    2274 	.db #0x50	; 80	'P'
+      000496 0E                    2275 	.db #0x0e	; 14
+      000497 28                    2276 	.db #0x28	; 40
+      000498 10                    2277 	.db #0x10	; 16
+      000499 C8                    2278 	.db #0xc8	; 200
+      00049A 24                    2279 	.db #0x24	; 36
+      00049B 50                    2280 	.db #0x50	; 80	'P'
+      00049C 10                    2281 	.db #0x10	; 16
+      00049D 28                    2282 	.db #0x28	; 40
+      00049E 13                    2283 	.db #0x13	; 19
+      00049F 28                    2284 	.db #0x28	; 40
+      0004A0 15                    2285 	.db #0x15	; 21
+      0004A1 50                    2286 	.db #0x50	; 80	'P'
+      0004A2 15                    2287 	.db #0x15	; 21
+      0004A3 50                    2288 	.db #0x50	; 80	'P'
+      0004A4 17                    2289 	.db #0x17	; 23
+      0004A5 32                    2290 	.db #0x32	; 50	'2'
+      0004A6 15                    2291 	.db #0x15	; 21
+      0004A7 32                    2292 	.db #0x32	; 50	'2'
+      0004A8 13                    2293 	.db #0x13	; 19
+      0004A9 32                    2294 	.db #0x32	; 50	'2'
+      0004AA 10                    2295 	.db #0x10	; 16
+      0004AB A0                    2296 	.db #0xa0	; 160
+      0004AC 24                    2297 	.db #0x24	; 36
+      0004AD 50                    2298 	.db #0x50	; 80	'P'
+      0004AE 10                    2299 	.db #0x10	; 16
+      0004AF 50                    2300 	.db #0x50	; 80	'P'
+      0004B0 0E                    2301 	.db #0x0e	; 14
+      0004B1 A0                    2302 	.db #0xa0	; 160
+      0004B2 0E                    2303 	.db #0x0e	; 14
+      0004B3 28                    2304 	.db #0x28	; 40
+      0004B4 0C                    2305 	.db #0x0c	; 12
+      0004B5 28                    2306 	.db #0x28	; 40
+      0004B6 09                    2307 	.db #0x09	; 9
+      0004B7 28                    2308 	.db #0x28	; 40
+      0004B8 07                    2309 	.db #0x07	; 7
+      0004B9 28                    2310 	.db #0x28	; 40
+      0004BA 09                    2311 	.db #0x09	; 9
+      0004BB F0                    2312 	.db #0xf0	; 240
+      0004BC 0C                    2313 	.db #0x0c	; 12
+      0004BD 50                    2314 	.db #0x50	; 80	'P'
+      0004BE 0B                    2315 	.db #0x0b	; 11
+      0004BF A0                    2316 	.db #0xa0	; 160
+      0004C0 09                    2317 	.db #0x09	; 9
+      0004C1 50                    2318 	.db #0x50	; 80	'P'
+      0004C2 07                    2319 	.db #0x07	; 7
+      0004C3 50                    2320 	.db #0x50	; 80	'P'
+      0004C4 09                    2321 	.db #0x09	; 9
+      0004C5 A0                    2322 	.db #0xa0	; 160
+      0004C6 0C                    2323 	.db #0x0c	; 12
+      0004C7 50                    2324 	.db #0x50	; 80	'P'
+      0004C8 0E                    2325 	.db #0x0e	; 14
+      0004C9 50                    2326 	.db #0x50	; 80	'P'
+      0004CA 10                    2327 	.db #0x10	; 16
+      0004CB 50                    2328 	.db #0x50	; 80	'P'
+      0004CC 13                    2329 	.db #0x13	; 19
+      0004CD 50                    2330 	.db #0x50	; 80	'P'
+      0004CE 10                    2331 	.db #0x10	; 16
+      0004CF 28                    2332 	.db #0x28	; 40
+      0004D0 0E                    2333 	.db #0x0e	; 14
+      0004D1 28                    2334 	.db #0x28	; 40
+      0004D2 0C                    2335 	.db #0x0c	; 12
+      0004D3 28                    2336 	.db #0x28	; 40
+      0004D4 0E                    2337 	.db #0x0e	; 14
+      0004D5 28                    2338 	.db #0x28	; 40
+      0004D6 10                    2339 	.db #0x10	; 16
+      0004D7 50                    2340 	.db #0x50	; 80	'P'
+      0004D8 15                    2341 	.db #0x15	; 21
+      0004D9 50                    2342 	.db #0x50	; 80	'P'
+      0004DA 10                    2343 	.db #0x10	; 16
+      0004DB 28                    2344 	.db #0x28	; 40
+      0004DC 0E                    2345 	.db #0x0e	; 14
+      0004DD 28                    2346 	.db #0x28	; 40
+      0004DE 0C                    2347 	.db #0x0c	; 12
+      0004DF 28                    2348 	.db #0x28	; 40
+      0004E0 0E                    2349 	.db #0x0e	; 14
+      0004E1 28                    2350 	.db #0x28	; 40
+      0004E2 10                    2351 	.db #0x10	; 16
+      0004E3 50                    2352 	.db #0x50	; 80	'P'
+      0004E4 17                    2353 	.db #0x17	; 23
+      0004E5 50                    2354 	.db #0x50	; 80	'P'
+      0004E6 17                    2355 	.db #0x17	; 23
+      0004E7 50                    2356 	.db #0x50	; 80	'P'
+      0004E8 10                    2357 	.db #0x10	; 16
+      0004E9 28                    2358 	.db #0x28	; 40
+      0004EA 13                    2359 	.db #0x13	; 19
+      0004EB 28                    2360 	.db #0x28	; 40
+      0004EC 15                    2361 	.db #0x15	; 21
+      0004ED A0                    2362 	.db #0xa0	; 160
+      0004EE 15                    2363 	.db #0x15	; 21
+      0004EF 50                    2364 	.db #0x50	; 80	'P'
+      0004F0 13                    2365 	.db #0x13	; 19
+      0004F1 50                    2366 	.db #0x50	; 80	'P'
+      0004F2 15                    2367 	.db #0x15	; 21
+      0004F3 50                    2368 	.db #0x50	; 80	'P'
+      0004F4 13                    2369 	.db #0x13	; 19
+      0004F5 50                    2370 	.db #0x50	; 80	'P'
+      0004F6 15                    2371 	.db #0x15	; 21
+      0004F7 28                    2372 	.db #0x28	; 40
+      0004F8 13                    2373 	.db #0x13	; 19
+      0004F9 28                    2374 	.db #0x28	; 40
+      0004FA 10                    2375 	.db #0x10	; 16
+      0004FB 28                    2376 	.db #0x28	; 40
+      0004FC 0E                    2377 	.db #0x0e	; 14
+      0004FD 28                    2378 	.db #0x28	; 40
+      0004FE 10                    2379 	.db #0x10	; 16
+      0004FF 50                    2380 	.db #0x50	; 80	'P'
+      000500 13                    2381 	.db #0x13	; 19
+      000501 50                    2382 	.db #0x50	; 80	'P'
+      000502 10                    2383 	.db #0x10	; 16
+      000503 50                    2384 	.db #0x50	; 80	'P'
+      000504 10                    2385 	.db #0x10	; 16
+      000505 50                    2386 	.db #0x50	; 80	'P'
+      000506 0E                    2387 	.db #0x0e	; 14
+      000507 A0                    2388 	.db #0xa0	; 160
+      000508 0C                    2389 	.db #0x0c	; 12
+      000509 50                    2390 	.db #0x50	; 80	'P'
+      00050A 0E                    2391 	.db #0x0e	; 14
+      00050B 50                    2392 	.db #0x50	; 80	'P'
+      00050C 10                    2393 	.db #0x10	; 16
+      00050D A0                    2394 	.db #0xa0	; 160
+      00050E 0C                    2395 	.db #0x0c	; 12
+      00050F 50                    2396 	.db #0x50	; 80	'P'
+      000510 0E                    2397 	.db #0x0e	; 14
+      000511 50                    2398 	.db #0x50	; 80	'P'
+      000512 10                    2399 	.db #0x10	; 16
+      000513 50                    2400 	.db #0x50	; 80	'P'
+      000514 13                    2401 	.db #0x13	; 19
+      000515 50                    2402 	.db #0x50	; 80	'P'
+      000516 10                    2403 	.db #0x10	; 16
+      000517 28                    2404 	.db #0x28	; 40
+      000518 0E                    2405 	.db #0x0e	; 14
+      000519 28                    2406 	.db #0x28	; 40
+      00051A 0C                    2407 	.db #0x0c	; 12
+      00051B 28                    2408 	.db #0x28	; 40
+      00051C 0E                    2409 	.db #0x0e	; 14
+      00051D 28                    2410 	.db #0x28	; 40
+      00051E 10                    2411 	.db #0x10	; 16
+      00051F 50                    2412 	.db #0x50	; 80	'P'
+      000520 15                    2413 	.db #0x15	; 21
+      000521 50                    2414 	.db #0x50	; 80	'P'
+      000522 10                    2415 	.db #0x10	; 16
+      000523 28                    2416 	.db #0x28	; 40
+      000524 0E                    2417 	.db #0x0e	; 14
+      000525 28                    2418 	.db #0x28	; 40
+      000526 0C                    2419 	.db #0x0c	; 12
+      000527 28                    2420 	.db #0x28	; 40
+      000528 0E                    2421 	.db #0x0e	; 14
+      000529 28                    2422 	.db #0x28	; 40
+      00052A 10                    2423 	.db #0x10	; 16
+      00052B 50                    2424 	.db #0x50	; 80	'P'
+      00052C 17                    2425 	.db #0x17	; 23
+      00052D 50                    2426 	.db #0x50	; 80	'P'
+      00052E 17                    2427 	.db #0x17	; 23
+      00052F 50                    2428 	.db #0x50	; 80	'P'
+      000530 10                    2429 	.db #0x10	; 16
+      000531 28                    2430 	.db #0x28	; 40
+      000532 13                    2431 	.db #0x13	; 19
+      000533 28                    2432 	.db #0x28	; 40
+      000534 15                    2433 	.db #0x15	; 21
+      000535 A0                    2434 	.db #0xa0	; 160
+      000536 15                    2435 	.db #0x15	; 21
+      000537 50                    2436 	.db #0x50	; 80	'P'
+      000538 13                    2437 	.db #0x13	; 19
+      000539 28                    2438 	.db #0x28	; 40
+      00053A 15                    2439 	.db #0x15	; 21
+      00053B 28                    2440 	.db #0x28	; 40
+      00053C 24                    2441 	.db #0x24	; 36
+      00053D F0                    2442 	.db #0xf0	; 240
+      00053E 13                    2443 	.db #0x13	; 19
+      00053F 50                    2444 	.db #0x50	; 80	'P'
+      000540 15                    2445 	.db #0x15	; 21
+      000541 50                    2446 	.db #0x50	; 80	'P'
+      000542 18                    2447 	.db #0x18	; 24
+      000543 A0                    2448 	.db #0xa0	; 160
+      000544 15                    2449 	.db #0x15	; 21
+      000545 50                    2450 	.db #0x50	; 80	'P'
+      000546 10                    2451 	.db #0x10	; 16
+      000547 50                    2452 	.db #0x50	; 80	'P'
+      000548 13                    2453 	.db #0x13	; 19
+      000549 F0                    2454 	.db #0xf0	; 240
+      00054A 24                    2455 	.db #0x24	; 36
+      00054B F0                    2456 	.db #0xf0	; 240
+      00054C 07                    2457 	.db #0x07	; 7
+      00054D 28                    2458 	.db #0x28	; 40
+      00054E 09                    2459 	.db #0x09	; 9
+      00054F 28                    2460 	.db #0x28	; 40
+      000550 0C                    2461 	.db #0x0c	; 12
+      000551 50                    2462 	.db #0x50	; 80	'P'
+      000552 0C                    2463 	.db #0x0c	; 12
+      000553 50                    2464 	.db #0x50	; 80	'P'
+      000554 0C                    2465 	.db #0x0c	; 12
+      000555 50                    2466 	.db #0x50	; 80	'P'
+      000556 0E                    2467 	.db #0x0e	; 14
+      000557 28                    2468 	.db #0x28	; 40
+      000558 10                    2469 	.db #0x10	; 16
+      000559 C8                    2470 	.db #0xc8	; 200
+      00055A 24                    2471 	.db #0x24	; 36
+      00055B 50                    2472 	.db #0x50	; 80	'P'
+      00055C 10                    2473 	.db #0x10	; 16
+      00055D 28                    2474 	.db #0x28	; 40
+      00055E 13                    2475 	.db #0x13	; 19
+      00055F 28                    2476 	.db #0x28	; 40
+      000560 15                    2477 	.db #0x15	; 21
+      000561 50                    2478 	.db #0x50	; 80	'P'
+      000562 15                    2479 	.db #0x15	; 21
+      000563 50                    2480 	.db #0x50	; 80	'P'
+      000564 17                    2481 	.db #0x17	; 23
+      000565 32                    2482 	.db #0x32	; 50	'2'
+      000566 15                    2483 	.db #0x15	; 21
+      000567 32                    2484 	.db #0x32	; 50	'2'
+      000568 13                    2485 	.db #0x13	; 19
+      000569 32                    2486 	.db #0x32	; 50	'2'
+      00056A 10                    2487 	.db #0x10	; 16
+      00056B A0                    2488 	.db #0xa0	; 160
+      00056C 24                    2489 	.db #0x24	; 36
+      00056D 50                    2490 	.db #0x50	; 80	'P'
+      00056E 10                    2491 	.db #0x10	; 16
+      00056F 50                    2492 	.db #0x50	; 80	'P'
+      000570 0E                    2493 	.db #0x0e	; 14
+      000571 A0                    2494 	.db #0xa0	; 160
+      000572 0E                    2495 	.db #0x0e	; 14
+      000573 28                    2496 	.db #0x28	; 40
+      000574 0C                    2497 	.db #0x0c	; 12
+      000575 28                    2498 	.db #0x28	; 40
+      000576 09                    2499 	.db #0x09	; 9
+      000577 28                    2500 	.db #0x28	; 40
+      000578 07                    2501 	.db #0x07	; 7
+      000579 28                    2502 	.db #0x28	; 40
+      00057A 09                    2503 	.db #0x09	; 9
+      00057B F0                    2504 	.db #0xf0	; 240
+      00057C 0C                    2505 	.db #0x0c	; 12
+      00057D 50                    2506 	.db #0x50	; 80	'P'
+      00057E 0B                    2507 	.db #0x0b	; 11
+      00057F A0                    2508 	.db #0xa0	; 160
+      000580 09                    2509 	.db #0x09	; 9
+      000581 50                    2510 	.db #0x50	; 80	'P'
+      000582 07                    2511 	.db #0x07	; 7
+      000583 28                    2512 	.db #0x28	; 40
+      000584 09                    2513 	.db #0x09	; 9
+      000585 C8                    2514 	.db #0xc8	; 200
+      000586 24                    2515 	.db #0x24	; 36
+      000587 A0                    2516 	.db #0xa0	; 160
+      000588 24                    2517 	.db #0x24	; 36
+      000589 FA                    2518 	.db #0xfa	; 250
+      00058A FF                    2519 	.db #0xff	; 255
+                                   2520 	.area XINIT   (CODE)
+                                   2521 	.area CABS    (ABS,CODE)

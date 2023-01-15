@@ -1,0 +1,357 @@
+C51 COMPILER V9.57.0.0   BUZZER                                                            01/15/2023 17:02:33 PAGE 1   
+
+
+C51 COMPILER V9.57.0.0, COMPILATION OF MODULE BUZZER
+OBJECT MODULE PLACED IN .\Objects\buzzer.obj
+COMPILER INVOKED BY: d:\Keil_v5\C51\BIN\C51.EXE src\buzzer.c OPTIMIZE(8,SPEED) BROWSE INCDIR(.\inc) DEBUG OBJECTEXTEND P
+                    -RINT(.\Listings\buzzer.lst) OBJECT(.\Objects\buzzer.obj)
+
+line level    source
+
+   1          #include "buzzer.h"
+   2          
+   3          uint16_t code Musical_Scale[] = 
+   4          {
+   5              42272,39898,37660,35546,33550,31668,29890,28212,26630,25134,23724,22392,//0-11
+   6              21136,19950,18828,17772,16776,15834,14944,14106,13314,12568,11862,11196,//12-23
+   7              10568,9974,9414,8886,8388,7920,7472,7054,6658,6284,5930,5598,//24-35
+   8              0//36
+   9          };
+  10          
+  11          enum
+  12          {
+  13              DO_ = 0,
+  14              DO_X_, 
+  15              RE_,
+  16              RE_X_,
+  17              MI_,
+  18              FA_,
+  19              FA_X_,
+  20              SO_,
+  21              SO_X_,
+  22              LA_,
+  23              LA_X_,
+  24              XI_,
+  25              DO,
+  26              DO_X, 
+  27              RE,
+  28              RE_X,
+  29              MI,
+  30              FA,
+  31              FA_X,
+  32              SO,
+  33              SO_X,
+  34              LA,
+  35              LA_X,
+  36              XI,
+  37              _DO,
+  38              _DO_X, 
+  39              _RE,
+  40              _RE_X,
+  41              _MI,
+  42              _FA,
+  43              _FA_X,
+  44              _SO,
+  45              _SO_X,
+  46              _LA,
+  47              _LA_X,
+  48              _XI,
+  49              ST
+  50          };
+  51          
+  52          uint8_t code two_tigers[] = {
+  53              DO, 50, RE, 50, MI, 50, DO, 50, 
+  54              DO, 50, RE, 50, MI, 50, DO, 50, 
+C51 COMPILER V9.57.0.0   BUZZER                                                            01/15/2023 17:02:33 PAGE 2   
+
+  55              MI, 50, FA, 50, SO, 100, 
+  56              MI, 50, FA, 50, SO, 100, 
+  57              SO, 25, LA, 25, SO, 25, FA, 25, MI, 50, DO, 50,
+  58              SO, 25, LA, 25, SO, 25, FA, 25, MI, 50, DO, 50,
+  59              MI, 50, SO_, 50, RE, 100,
+  60              MI, 50, SO_, 50, RE, 100,
+  61              ST, 250, 
+  62              0xff};
+  63          
+  64          uint8_t code qfl[] = {
+  65              /*XI_, 30, DO, 30, RE, 30, MI, 90, SO, 30, MI, 30, RE, 30, MI, 30, DO, 60, XI_, 30, DO, 30, SO_, 60,
+  66              XI_, 30, DO, 30, RE, 30, MI, 90, SO, 30, MI, 30, RE, 30, MI, 30, DO, 30, RE, 30, XI_, 30, DO, 30, LA_,
+             - 60,
+  67              XI_, 30, DO, 30, RE, 30, MI, 90, SO, 30, MI, 30, RE, 120, XI_, 60, SO_, 60,
+  68              LA_, 250, ST, 110, */
+  69              RE, 90, DO, 30, RE, 90, DO, 30, RE, 60, MI, 60, SO, 60, MI, 60,
+  70              RE, 90, DO, 30, RE, 90, DO, 30, RE, 30, MI, 30, RE, 30, DO, 30, LA_, 120,
+  71              RE, 90, DO, 30, RE, 90, DO, 30, RE, 60, MI, 60, SO, 60, MI, 60,
+  72              RE, 90, DO, 30, RE, 60, DO, 60, RE, 240, 
+  73              RE, 90, DO, 30, RE, 90, DO, 30, RE, 60, MI, 60, SO, 60, MI, 60,
+  74              RE, 90, DO, 30, RE, 60, DO, 60, LA_, 120, MI, 30, RE, 30, DO, 30, RE, 30, 
+  75              DO, 120, MI, 30, RE, 30, DO, 30, RE, 30, DO, 90, SO_, 30, MI, 30, RE, 30, DO, 30, RE, 30, 
+  76              DO, 240, DO, 60, RE, 60, MI, 60, DO, 60,
+  77              LA, 60, SO, 30, LA, 120, DO, 30, XI, 60, LA, 30, XI, 150, 
+  78              XI, 60, LA, 30, XI, 30, ST, 60, MI, 60, _DO, 30, _RE, 30, _DO, 30, XI, 30, LA, 60, SO, 60,
+  79              LA, 60, SO, 30, LA, 30, ST, 30, SO, 30, LA, 30, SO, 30, LA, 60, SO, 30, RE, 30, ST, 60, SO, 60,
+  80              MI, 120, ST, 120, DO, 60, RE, 60, MI, 60, DO, 60,
+  81              LA, 60, SO, 30, LA, 30, ST, 90, DO, 30, XI, 60, LA, 30, XI, 30, ST, 120,
+  82              XI, 60, LA, 30, XI, 30, ST, 60, MI, 60, _DO, 30, _RE, 30, _DO, 30, XI, 30, LA, 60, SO, 60,
+  83              LA, 60, _MI, 30, _MI, 30, ST, 60, SO, 60, LA, 60, _MI, 30, _MI, 30, ST, 60, SO, 60,
+  84              LA, 120, ST, 240, _DO, 60, _RE, 60, 
+  85              _MI, 60, _LA, 30, _SO, 30, ST, 60, _LA, 30, _SO, 30, ST, 60, _LA, 30, _SO, 30, ST, 60, _RE, 30, _MI, 3
+             -0, 
+  86              ST, 60, _LA, 30, _SO, 30, ST, 60, _LA, 30, _SO, 30, ST, 60, _LA, 30, _SO, 30, ST, 30, _MI, 90,
+  87              _RE, 60, _DO, 30, LA, 30, ST, 60, _DO, 30, _DO, 30, _RE, 30, _DO, 30, LA, 60, ST, 30, _DO, 90,
+  88              _MI, 120, ST, 30, _FA, 30, _MI, 30, _RE, 30, _MI, 30, _RE, 90, _DO, 60, _RE, 60,
+  89              _MI, 60, _LA, 30, _SO, 30, ST, 60, _LA, 30, _SO, 30, ST, 60, _LA, 30, _SO, 30, ST, 60, _RE, 60,
+  90              _MI, 60, _LA, 30, _SO, 30, ST, 60, _LA, 30, _SO, 30, ST, 60, _LA, 30, _SO, 30, ST, 30, _MI, 90,
+  91              _RE, 60, _DO, 30, _LA, 30, ST, 30, _MI, 90, _RE, 60, _DO, 30, _LA, 30, ST, 30, _DO, 90, 
+  92              _DO, 120, ST, 240, _LA, 30, _MI, 90, 
+  93              _RE, 60, _DO, 30, _LA, 30, ST, 30, _MI, 90, _RE, 60, _DO, 30, _LA, 30, ST, 30, _DO, 90,
+  94              _DO, 240, ST, 240,
+  95              
+  96              ST, 250, 
+  97              0xff};
+  98          
+  99          uint8_t code ryssdnr[] = {
+ 100              SO_, 80, LA_, 80,
+ 101              DO, 80, DO, 80, DO, 80, RE, 40, MI, 200, ST, 80, MI, 40, SO, 40,
+ 102              LA, 80, LA, 80, XI, 50, LA, 50, SO, 50, MI, 160, ST, 80, MI, 80,
+ 103              RE, 160, RE, 40, DO, 40, LA_, 80, SO_, 80, LA_, 80, ST, 80, SO_, 80, 
+ 104              DO, 160, DO, 80, DO, 80, RE, 160, ST, 80, SO_, 40, LA_, 40, 
+ 105              DO, 80, DO, 80, DO, 80, RE, 40, MI, 200, ST, 80, MI, 40, SO, 40,
+ 106              LA, 80, LA, 80, XI, 50, LA, 50, SO, 50, MI, 160, ST, 80, MI, 80,
+ 107              RE, 160, RE, 40, DO, 40, LA_, 40, SO_, 40, LA_, 240, DO, 80, 
+ 108              XI_, 160, LA_, 80, SO_, 80, LA_, 160, DO, 80, RE, 80, 
+ 109              MI, 80, SO, 80, MI, 40, RE, 40, DO, 40, RE, 40, MI, 80, LA, 80, MI, 40, RE, 40, DO, 40, RE, 40,
+ 110              MI, 80, XI, 80, XI, 80, MI, 40, SO, 40, LA, 160, LA, 80, SO, 80,
+ 111              LA, 80, SO, 80, LA, 40, SO, 40, MI, 40, RE, 40, MI, 80, SO, 80, MI, 80, MI, 80, 
+ 112              RE, 160, DO, 80, RE, 80, MI, 160, DO, 80, RE, 80, 
+ 113              MI, 80, SO, 80, MI, 40, RE, 40, DO, 40, RE, 40, MI, 80, LA, 80, MI, 40, RE, 40, DO, 40, RE, 40,
+ 114              MI, 80, XI, 80, XI, 80, MI, 40, SO, 40, LA, 160, LA, 80, SO, 40, LA, 40,
+C51 COMPILER V9.57.0.0   BUZZER                                                            01/15/2023 17:02:33 PAGE 3   
+
+ 115              ST, 240, SO, 80, LA, 80, _DO, 160, LA, 80,
+ 116              MI, 80, SO, 240, ST, 240, SO_, 40, LA_, 40,
+ 117              DO, 80, DO, 80, DO, 80, RE, 40, MI, 200, ST, 80, MI, 40, SO, 40, 
+ 118              LA, 80, LA, 80, XI, 50, LA, 50, SO, 50, MI, 160, ST, 80, MI, 80,
+ 119              RE, 160, RE, 40, DO, 40, LA_, 40, SO_, 40, LA_, 240, DO, 80, 
+ 120              XI_, 160, LA_, 80, SO_, 40, LA_, 200, ST, 160, 
+ 121              
+ 122              SO_, 80, LA_, 80,
+ 123              DO, 80, DO, 80, DO, 80, RE, 40, MI, 200, ST, 80, MI, 40, SO, 40,
+ 124              LA, 80, LA, 80, XI, 50, LA, 50, SO, 50, MI, 160, ST, 80, RE, 40, MI, 40, 
+ 125              RE, 160, RE, 40, DO, 40, LA_, 80, SO_, 80, LA_, 80, ST, 80, SO_, 80, 
+ 126              DO, 160, DO, 80, DO, 80, RE, 160, ST, 80, SO_, 40, LA_, 40, 
+ 127              DO, 80, DO, 80, DO, 80, RE, 40, MI, 200, ST, 80, MI, 40, SO, 40,
+ 128              LA, 80, LA, 80, XI, 50, LA, 50, SO, 50, MI, 160, ST, 80, MI, 80,
+ 129              RE, 160, RE, 40, DO, 40, LA_, 40, SO_, 40, LA_, 240, DO, 80, 
+ 130              XI_, 160, LA_, 80, SO_, 80, LA_, 160, DO, 80, RE, 80, 
+ 131              MI, 80, SO, 80, MI, 40, RE, 40, DO, 40, RE, 40, MI, 80, LA, 80, MI, 40, RE, 40, DO, 40, RE, 40,
+ 132              MI, 80, XI, 80, XI, 80, MI, 40, SO, 40, LA, 160, LA, 80, SO, 80,
+ 133              LA, 80, SO, 80, LA, 40, SO, 40, MI, 40, RE, 40, MI, 80, SO, 80, MI, 80, MI, 80, 
+ 134              RE, 160, DO, 80, RE, 80, MI, 160, DO, 80, RE, 80, 
+ 135              MI, 80, SO, 80, MI, 40, RE, 40, DO, 40, RE, 40, MI, 80, LA, 80, MI, 40, RE, 40, DO, 40, RE, 40,
+ 136              MI, 80, XI, 80, XI, 80, MI, 40, SO, 40, LA, 160, LA, 80, SO, 80,
+ 137              LA, 80, LA, 160, _DO, 80, _DO, 80, _DO, 80, LA, 80, MI, 80,
+ 138              SO, 160, ST, 160, ST, 240, SO_, 40, LA_, 40, 
+ 139              
+ 140              DO, 80, DO, 80, DO, 80, RE, 40, MI, 200, ST, 80, MI, 40, SO, 40,
+ 141              LA, 80, LA, 80, XI, 50, LA, 50, SO, 50, MI, 160, ST, 80, MI, 80,
+ 142              RE, 160, RE, 40, DO, 40, LA_, 40, SO_, 40, LA_, 240, DO, 80, 
+ 143              XI_, 160, LA_, 80, SO_, 80, LA_, 160, DO, 80, RE, 80, 
+ 144              MI, 80, SO, 80, MI, 40, RE, 40, DO, 40, RE, 40, MI, 80, LA, 80, MI, 40, RE, 40, DO, 40, RE, 40,
+ 145              MI, 80, XI, 80, XI, 80, MI, 40, SO, 40, LA, 160, LA, 80, SO, 80,
+ 146              LA, 80, SO, 80, LA, 40, SO, 40, MI, 40, RE, 40, MI, 80, SO, 80, MI, 80, MI, 80, 
+ 147              RE, 160, DO, 80, RE, 80, MI, 160, DO, 80, RE, 80,
+ 148              MI, 80, SO, 80, MI, 40, RE, 40, DO, 40, RE, 40, MI, 80, LA, 80, MI, 40, RE, 40, DO, 40, RE, 40,
+ 149              MI, 80, XI, 80, XI, 80, MI, 40, SO, 40, LA, 160, LA, 80, SO, 40, LA, 40,
+ 150              ST, 240, SO, 80, LA, 80, _DO, 160, LA, 80,
+ 151              MI, 80, SO, 240, ST, 240, SO_, 40, LA_, 40,
+ 152              
+ 153              DO, 80, DO, 80, DO, 80, RE, 40, MI, 200, ST, 80, MI, 40, SO, 40,
+ 154              LA, 80, LA, 80, XI, 50, LA, 50, SO, 50, MI, 160, ST, 80, MI, 80,
+ 155              RE, 160, RE, 40, DO, 40, LA_, 40, SO_, 40, LA_, 240, DO, 80, 
+ 156              XI_, 160, LA_, 80, SO_, 40, LA_, 200, ST, 160, 
+ 157              
+ 158              ST, 250, 0xff};
+ 159              
+ 160          uint8_t code *Musi_List[] = 
+ 161          {
+ 162              two_tigers, qfl, ryssdnr
+ 163          };
+ 164          
+ 165          static uint8_t play_index = 0xff;
+ 166          static uint16_t play_count = 0;
+ 167          static uint8_t sleep_time = 0;
+ 168          uint8_t shutdown_time = 0;
+ 169          static volatile uint8_t pwm_range = 0;
+ 170          bit out_z = 0;
+ 171          
+ 172          void buzzer_play(uint8_t v)
+ 173          {
+ 174   1          play_index = v;
+ 175   1          play_count = 0;
+ 176   1      }
+C51 COMPILER V9.57.0.0   BUZZER                                                            01/15/2023 17:02:33 PAGE 4   
+
+ 177          
+ 178          uint8_t buzzer_is_play(void)
+ 179          {
+ 180   1          return play_index != 0xff;
+ 181   1      }
+ 182          
+ 183          #ifdef __SDCC
+              void PWM1_Interrupt(void) interrupt(26)
+              #else
+ 186          void PWM1_Interrupt(void) interrupt 26
+ 187          #endif
+ 188          {
+ 189   1          PWM1_SR1 = 0x00;
+ 190   1          if(out_z)
+ 191   1              PWM2_CCR3L = pwm_range;
+ 192   1          else 
+ 193   1              PWM2_CCR3L = 0;
+ 194   1          out_z = !out_z;
+ 195   1      }
+ 196          
+ 197          void pwm_enable(void)
+ 198          {
+ 199   1          PWMB_PS = 0x20;
+ 200   1          PWMB_ENO   = 0x10;
+ 201   1          PWMB_CCER2 = 0x00;
+ 202   1          PWMB_CCMR3 = 0x60;
+ 203   1          PWMB_CCER2 = 0x01;
+ 204   1      
+ 205   1          PWM2_CCR3H = 0;
+ 206   1          PWM2_CCR3L = 0;
+ 207   1          PWM2_ARRH = 1;
+ 208   1          PWM2_ARRL = 0;
+ 209   1      
+ 210   1          PWMB_BKR   = 0x80;
+ 211   1          PWMB_CR1   = 0x01;
+ 212   1      }
+ 213          
+ 214          void pwm_disable(void)
+ 215          {
+ 216   1          PWMB_CR1 = 0x00;
+ 217   1          PWMB_BKR = 0x00;
+ 218   1          PWMB_ENO = 0x00;
+ 219   1          BUZZ_OUT = 0;
+ 220   1      }
+ 221          
+ 222          void time_enable(void)
+ 223          {
+ 224   1          PWM1_CNTRH = 0x00;
+ 225   1          PWM1_CNTRL = 0x00;
+ 226   1      
+ 227   1          PWM1_SR1 = 0x00;
+ 228   1          PWM1_IER = 0x01;
+ 229   1          PWM1_CR1 = 0x01;
+ 230   1      }
+ 231          
+ 232          void time_disable(void)
+ 233          {
+ 234   1          PWM1_CR1 = 0;
+ 235   1          PWM1_IER = 0;
+ 236   1      }
+ 237          
+ 238          minisch_type_t buzzer_app(void)
+C51 COMPILER V9.57.0.0   BUZZER                                                            01/15/2023 17:02:33 PAGE 5   
+
+ 239          {
+ 240   1          _SS
+ 241   2      
+ 242   2          while(MINI_SCH_RUN)
+ 243   2          {
+ 244   3              WDT_CONTR = 0x36;
+ 245   3              WaitX(1);
+ 246   3              if(sleep_time)
+ 247   3              {
+ 248   4                  sleep_time--;
+ 249   4              }
+ 250   3              else if(shutdown_time)
+ 251   3              {
+ 252   4                  shutdown_time--;
+ 253   4                  sleep_time = 200;
+ 254   4              }
+ 255   3      
+ 256   3              if(play_index == 0xff)
+ 257   3                  continue;
+ 258   3              
+ 259   3              shutdown_time = 30;
+ 260   3              pwm_enable();
+ 261   3              while(1)
+ 262   3              {
+ 263   4                  WDT_CONTR = 0x36;
+ 264   4                  if(Musi_List[play_index][play_count] == 0xff)  
+ 265   4                  {
+ 266   5                      play_index = 0xff;
+ 267   5                      play_count = 0;
+ 268   5                      break;
+ 269   5                  }
+ 270   4                  
+ 271   4                  if(Musical_Scale[Musi_List[play_index][play_count]])    
+ 272   4                  {
+ 273   5                      PWM1_ARRH = (Musical_Scale[Musi_List[play_index][play_count]] / 2) / 256;
+ 274   5                      PWM1_ARRL = (Musical_Scale[Musi_List[play_index][play_count]] / 2);
+ 275   5                      time_enable();
+ 276   5                      pwm_range = 255;
+ 277   5                  }
+ 278   4                  else   
+ 279   4                  {
+ 280   5                      PWM2_CCR3L = 0;
+ 281   5                  }
+ 282   4                  WaitX(75);
+ 283   4                  play_count++;
+ 284   4                  sleep_time = Musi_List[play_index][play_count] - 15;
+ 285   4                  play_count++;
+ 286   4                  
+ 287   4                  for(;sleep_time > 0;sleep_time--)
+ 288   4                  {
+ 289   5                      if(pwm_range)
+ 290   5                          pwm_range -= ((pwm_range / 104) + 1);
+ 291   5                      WaitX(2);
+ 292   5                      if(pwm_range)
+ 293   5                          pwm_range -= (pwm_range / 88);
+ 294   5                      WaitX(3);
+ 295   5                  }
+ 296   4                  WDT_CONTR = 0x36;
+ 297   4                  if(Musical_Scale[Musi_List[play_index][play_count]] == 0)   
+ 298   4                  {
+ 299   5                      play_count++;
+ 300   5                      sleep_time = Musi_List[play_index][play_count];
+C51 COMPILER V9.57.0.0   BUZZER                                                            01/15/2023 17:02:33 PAGE 6   
+
+ 301   5                      for(;sleep_time > 0;sleep_time--)
+ 302   5                      {
+ 303   6                          if(pwm_range)
+ 304   6                              pwm_range -= ((pwm_range / 104) + 1);
+ 305   6                          WaitX(2);
+ 306   6                          if(pwm_range)
+ 307   6                              pwm_range -= (pwm_range / 88);
+ 308   6                          WaitX(3);
+ 309   6                      }
+ 310   5                      play_count++;
+ 311   5                  }
+ 312   4                
+ 313   4                  time_disable();
+ 314   4                  pwm_range = 0;
+ 315   4              }
+ 316   3              pwm_disable();
+ 317   3              sleep_time = 200;
+ 318   3          }
+ 319   2      
+ 320   2          _EE
+ 321   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    611    ----
+   CONSTANT SIZE    =   1419    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     13    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =      1    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

@@ -1,0 +1,6 @@
+".\Objects\STARTUP.obj",
+".\Objects\buzzer.obj",
+".\Objects\main.obj",
+".\Objects\interrupt_handled.obj" 
+TO ".\Objects\buzzer_hx" 
+PRINT(".\Listings\buzzer_hx.m51") RAMSIZE(256) 

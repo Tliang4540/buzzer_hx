@@ -1,0 +1,25 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"C_Cpp.default.defines": [
+			"__bit = _Bool",
+			"__xdata = ",
+			"__code = ",
+			"__using(x) = ",
+			"__interrupt(x) = ",
+			"__sfr = unsigned char",
+			"__sbit = unsigned char",
+			"__at(x) = ",
+			"PI = 3.14",
+			"__SDCC"
+		],
+		"C_Cpp.default.includePath": [
+			"${workspaceFolder}/**"
+		],
+		"files.encoding": "gb2312"
+	}
+}

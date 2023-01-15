@@ -1,0 +1,272 @@
+C51 COMPILER V9.57.0.0   INTERRUPT_HANDLED                                                 01/15/2023 17:02:34 PAGE 1   
+
+
+C51 COMPILER V9.57.0.0, COMPILATION OF MODULE INTERRUPT_HANDLED
+OBJECT MODULE PLACED IN .\Objects\interrupt_handled.obj
+COMPILER INVOKED BY: d:\Keil_v5\C51\BIN\C51.EXE src\interrupt_handled.c OPTIMIZE(8,SPEED) BROWSE INCDIR(.\inc) DEBUG OBJ
+                    -ECTEXTEND PRINT(.\Listings\interrupt_handled.lst) OBJECT(.\Objects\interrupt_handled.obj)
+
+line level    source
+
+   1          #include "interrupt_handled.h"
+   2          
+   3          uint8_t wakeup_flag = 0;
+   4          
+   5          #ifdef __SDCC
+              
+              void INT0_Interrupt(void) interrupt(0)
+              {
+                      IAP_CONTR |= 0x60;
+              }
+              
+              void TIME0_Interrupt(void) interrupt(1) using(1)
+              {
+                      UpdateTimers();
+              }
+              
+              void INT1_Interrupt(void) interrupt(2)
+              {
+                      IAP_CONTR |= 0x60;
+              }
+              
+              void TIME1_Interrupt(void) interrupt(3)
+              {
+                      IAP_CONTR |= 0x60;
+              }
+              
+              void UART1_Interrupt(void) interrupt(4)
+              {
+                      IAP_CONTR |= 0x60;
+              }
+              
+              void ADC_Interrupt(void) interrupt(5)
+              {
+                      IAP_CONTR |= 0x60;
+              }
+              
+              void LVD_Interrupt(void) interrupt(6)
+              {
+                      IAP_CONTR |= 0x60;
+              }
+              
+              void PCA_Interrupt(void) interrupt(7)
+              {
+                      IAP_CONTR |= 0x60;
+              }
+              
+              void UART2_Interrupt(void) interrupt(8)
+              {
+                      IAP_CONTR |= 0x60;
+              }
+              
+              void SPI_Interrupt(void) interrupt(9)
+              {
+                      IAP_CONTR |= 0x60;
+C51 COMPILER V9.57.0.0   INTERRUPT_HANDLED                                                 01/15/2023 17:02:34 PAGE 2   
+
+              }
+              
+              void INT2_Interrupt(void) interrupt(10)
+              {
+                      IAP_CONTR |= 0x60;
+              }
+              
+              void INT3_Interrupt(void) interrupt(11)
+              {
+                      IAP_CONTR |= 0x60;
+              }
+              
+              void TIME2_Interrupt(void) interrupt(12)
+              {
+                      IAP_CONTR |= 0x60;
+              }
+              /*
+              void INT4_Interrupt(void) interrupt(16)
+              {
+                      IAP_CONTR |= 0x60;
+              }
+              
+              void UART3_Interrupt(void) interrupt (17)
+              {
+                      IAP_CONTR |= 0x60;
+              }
+              
+              void UART4_Interrupt(void) interrupt (18)
+              {
+                      IAP_CONTR |= 0x60;
+              }
+              
+              void TIME3_Interrupt(void) interrupt (19)
+              {
+                      IAP_CONTR |= 0x60;
+              }
+              
+              void TIME4_Interrupt(void) interrupt (20)
+              {
+                      IAP_CONTR |= 0x60;
+              }
+              
+              void CMP_Interrupt(void) interrupt (21)
+              {
+                      IAP_CONTR |= 0x60;
+              }
+              
+              void IIC_Interrupt(void) interrupt (24)
+              {
+                      IAP_CONTR |= 0x60;
+              }
+              
+              void USB_Interrupt(void) interrupt (25)
+              {
+                      IAP_CONTR |= 0x60;
+              }
+              
+              void PWM1_Interrupt(void) interrupt (26)
+              {
+                      IAP_CONTR |= 0x60;
+              }
+              
+C51 COMPILER V9.57.0.0   INTERRUPT_HANDLED                                                 01/15/2023 17:02:34 PAGE 3   
+
+              void PWM2_Interrupt(void) interrupt (27)
+              {
+                      IAP_CONTR |= 0x60;
+              }
+              */
+              #else
+ 123          
+ 124          void INT0_Interrupt(void) interrupt 0
+ 125          {
+ 126   1              IAP_CONTR |= 0x60;
+ 127   1      }
+ 128          
+ 129          void TIME0_Interrupt(void) interrupt 1 using 1 
+ 130          {
+ 131   1              UpdateTimers();
+ 132   1      }
+ 133          
+ 134          void INT1_Interrupt(void) interrupt 2 
+ 135          {
+ 136   1              IAP_CONTR |= 0x60;
+ 137   1      }
+ 138          
+ 139          void TIME1_Interrupt(void) interrupt 3 
+ 140          {
+ 141   1              IAP_CONTR |= 0x60;
+ 142   1      }
+ 143          
+ 144          void UART1_Interrupt(void) interrupt 4 
+ 145          {
+ 146   1              IAP_CONTR |= 0x60;
+ 147   1      }
+ 148          
+ 149          void ADC_Interrupt(void) interrupt 5 
+ 150          {
+ 151   1              IAP_CONTR |= 0x60;
+ 152   1      }
+ 153          
+ 154          void LVD_Interrupt(void) interrupt 6 
+ 155          {
+ 156   1              IAP_CONTR |= 0x60;
+ 157   1      }
+ 158          
+ 159          void PCA_Interrupt(void) interrupt 7 
+ 160          {
+ 161   1              IAP_CONTR |= 0x60;
+ 162   1      }
+ 163          
+ 164          void UART2_Interrupt(void) interrupt 8 
+ 165          {
+ 166   1              IAP_CONTR |= 0x60;
+ 167   1      }
+ 168          
+ 169          void SPI_Interrupt(void) interrupt 9 
+ 170          {
+ 171   1              IAP_CONTR |= 0x60;
+ 172   1      }
+ 173          
+ 174          void INT2_Interrupt(void) interrupt 10 
+ 175          {
+ 176   1              IAP_CONTR |= 0x60;
+ 177   1      }
+ 178          
+C51 COMPILER V9.57.0.0   INTERRUPT_HANDLED                                                 01/15/2023 17:02:34 PAGE 4   
+
+ 179          void INT3_Interrupt(void) interrupt 11 
+ 180          {
+ 181   1              IAP_CONTR |= 0x60;
+ 182   1      }
+ 183          
+ 184          void TIME2_Interrupt(void) interrupt 12 
+ 185          {
+ 186   1              IAP_CONTR |= 0x60;
+ 187   1      }
+ 188          
+ 189          void INT4_Interrupt(void) interrupt 16 
+ 190          {
+ 191   1              IAP_CONTR |= 0x60;
+ 192   1      }
+ 193          /*
+ 194          void UART3_Interrupt(void) interrupt  17 
+ 195          {
+ 196                  IAP_CONTR |= 0x60;
+ 197          }
+ 198          
+ 199          void UART4_Interrupt(void) interrupt  18 
+ 200          {
+ 201                  IAP_CONTR |= 0x60;
+ 202          }
+ 203          
+ 204          void TIME3_Interrupt(void) interrupt  19 
+ 205          {
+ 206                  IAP_CONTR |= 0x60;
+ 207          }
+ 208          
+ 209          void TIME4_Interrupt(void) interrupt  20 
+ 210          {
+ 211                  IAP_CONTR |= 0x60;
+ 212          }
+ 213          
+ 214          void CMP_Interrupt(void) interrupt  21 
+ 215          {
+ 216                  IAP_CONTR |= 0x60;
+ 217          }
+ 218          
+ 219          void IIC_Interrupt(void) interrupt  24 
+ 220          {
+ 221                  IAP_CONTR |= 0x60;
+ 222          }
+ 223          
+ 224          void USB_Interrupt(void) interrupt  25 
+ 225          {
+ 226                  IAP_CONTR |= 0x60;
+ 227          }
+ 228          
+ 229          void PWM1_Interrupt(void) interrupt  26 
+ 230          {
+ 231                  IAP_CONTR |= 0x60;
+ 232          }
+ 233          
+ 234          void PWM2_Interrupt(void) interrupt  27 
+ 235          {
+ 236                  IAP_CONTR |= 0x60;
+ 237          }
+ 238          */
+ 239          
+ 240          #endif
+C51 COMPILER V9.57.0.0   INTERRUPT_HANDLED                                                 01/15/2023 17:02:34 PAGE 5   
+
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     93    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      1       1
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
