@@ -186,7 +186,7 @@ void PWM1_Interrupt(void) interrupt(26)
 void PWM1_Interrupt(void) interrupt 26
 #endif
 {
-    //定时器中断更新PWM占空比
+    //定时器中断更新PWM占空比， 等于调整DAC输出电压
     PWM1_SR1 = 0x00;
     if(out_z)
         PWM2_CCR3L = pwm_range;
@@ -195,7 +195,7 @@ void PWM1_Interrupt(void) interrupt 26
     out_z = !out_z;
 }
 
-//开启pwm输出，频率=22118400/256，占空比0~255可调
+//开启pwm输出，频率=22118400/256，占空比0~255可调，等于模拟一个8位DAC
 void pwm_enable(void)
 {
     PWMB_PS = 0x20;
